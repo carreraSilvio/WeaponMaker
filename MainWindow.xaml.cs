@@ -40,12 +40,35 @@ namespace WeaponMaker
                     {
                         sw.WriteLine(output);
                     }
-                    this.ShowPopup(pointInScreenCoords);
                     break;
                 case System.Windows.Forms.DialogResult.Cancel:
                 default:
-                    //TxtFile.Text = null;
-                    //TxtFile.ToolTip = null;
+                    break;
+            }
+        }
+
+        private void HandleImportJsonClicked(object sender, RoutedEventArgs e)
+        {
+            var fileDialog = new OpenFileDialog
+            {
+                FileName = _weapon.WeaponName,
+                DefaultExt = ".json",
+                Filter = "Json files (*.json)|*.json"
+            };
+            var result = fileDialog.ShowDialog();
+            switch (result)
+            {
+                case System.Windows.Forms.DialogResult.OK:
+                    string input = "";
+                    using (StreamReader sw = new StreamReader(fileDialog.FileName))
+                    {
+                        input = sw.ReadToEnd();
+                    }
+                    var weapon = JsonConvert.DeserializeObject<Weapon>(input);
+                    _weapon.Copy(weapon);
+                    break;
+                case System.Windows.Forms.DialogResult.Cancel:
+                default:
                     break;
             }
         }

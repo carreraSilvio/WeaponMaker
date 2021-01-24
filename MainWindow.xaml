@@ -50,5 +50,6 @@
             Width="120" />
 
         <Button Content="Export json..." HorizontalAlignment="Left" Margin="10,227,0,0" VerticalAlignment="Top" Width="84" Height="20" Click="HandleExportJsonClicked" />
+        <Button Content="Import json..." HorizontalAlignment="Left" Margin="109,227,0,0" VerticalAlignment="Top" Width="84" Height="20" Click="HandleImportJsonClicked" />
     </Grid>
 </Window>

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Reflection;
 
 namespace WeaponMaker
 {
-    public class Weapon
+    public class Weapon : INotifyPropertyChanged
     {
         private string _weaponName = "Pistol";
 
@@ -49,6 +50,15 @@ namespace WeaponMaker
                 var isNumeric = int.TryParse(value, out int n);
                 _damage = isNumeric ? n : 0;
                 RaisePropertyChanged(nameof(Damage));
+            }
+        }
+
+        public void Copy(Weapon otherWeapon)
+        {
+            PropertyInfo[] properties = typeof(Weapon).GetProperties();
+            foreach (PropertyInfo property in properties)
+            {
+                property.SetValue(this, property.GetValue(otherWeapon));
             }
         }
 
