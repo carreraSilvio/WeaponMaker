@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Forms;
 using Newtonsoft.Json;
@@ -35,10 +36,18 @@ namespace WeaponMaker
             switch (result)
             {
                 case System.Windows.Forms.DialogResult.OK:
-                    string output = JsonConvert.SerializeObject(_weapon, Formatting.Indented);
-                    using (StreamWriter sw = new StreamWriter(fileDialog.FileName))
+                    try
                     {
-                        sw.WriteLine(output);
+                        string output = JsonConvert.SerializeObject(_weapon, Formatting.Indented);
+                        using (StreamWriter sw = new StreamWriter(fileDialog.FileName))
+                        {
+                            sw.WriteLine(output);
+                        }
+                        System.Windows.MessageBox.Show($"Sucess exporting {_weapon.WeaponName}!", "Success");
+                    }
+                    catch (Exception exception)
+                    {
+                        System.Windows.MessageBox.Show($"{exception.Message}", "Error");
                     }
                     break;
                 case System.Windows.Forms.DialogResult.Cancel:
@@ -73,5 +82,13 @@ namespace WeaponMaker
             }
         }
 
+        private void HandleSaveProjectClicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void HandleOpenProjectClicked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
