@@ -30,7 +30,9 @@ namespace WeaponMaker
             var result = FileSystemService.OpenProject();
             if(result.success)
             {
-                var editWindow = new EditWindow(result.project);
+                var session = ServiceLocator.Fetch<SessionService>();
+                session.Project = result.project;
+                var editWindow = new EditWindow();
                 editWindow.Show();
             }
 

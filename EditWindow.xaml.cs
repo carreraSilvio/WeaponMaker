@@ -22,36 +22,17 @@ namespace WeaponMaker
     /// </summary>
     public partial class EditWindow : Window
     {
-        private Weapon _weapon;
-        public Weapon Weapon
-        {
-            get => _weapon;
-            set => _weapon = value;
-        }
-
-        private Project _project;
-        public Project Project
-        {
-            get => _project;
-            set => _project = value;
-        }
+        private SessionService _session;
 
         private WeaponEditPage _weaponEditPage;
+        private ProjectEditPage _projectEditPage;
 
         public EditWindow()
         {
-            _project = new Project();
-            _weapon = new Weapon();
-            InitializeComponent();
-        }
-
-        public EditWindow(Project project)
-        {
-            _project = project;
-            _weapon = new Weapon();
+            _session = ServiceLocator.Fetch<SessionService>();
             InitializeComponent();
 
-            _weaponEditPage = new WeaponEditPage(_weapon);
+            _weaponEditPage = new WeaponEditPage();
             _mainFrame.Navigate(_weaponEditPage);
         }
 
@@ -74,13 +55,23 @@ namespace WeaponMaker
             var result = FileSystemService.OpenProject();
             if(result.success)
             {
-                _project = result.project;
+                _session.Project = result.project;
             }
         }
 
         private void HandleSaveProjectClicked(object sender, RoutedEventArgs e)
         {
-            FileSystemService.SaveProject(_project);
+            FileSystemService.SaveProject(_session.Project);
+        }
+
+        private void HandleWeaponsEditViewClicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void HandleProjectEditViewClicked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 

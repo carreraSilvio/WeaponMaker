@@ -13,5 +13,10 @@ namespace WeaponMaker
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            var session = new SessionService();
+            ServiceLocator.Add(session);
+        }
     }
 }

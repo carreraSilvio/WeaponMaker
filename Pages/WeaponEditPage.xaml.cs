@@ -20,17 +20,17 @@ namespace WeaponMaker
     /// </summary>
     public partial class WeaponEditPage : Page
     {
-        private Weapon _weapon;
+        private SessionService _session;
+   
         public Weapon Weapon
         {
-            get => _weapon;
-            set => _weapon = value;
+            get => _session.CurrentWeapon;
+            set => _session.CurrentWeapon.Copy(value);
         }
 
-        public WeaponEditPage(Weapon weapon)
+        public WeaponEditPage()
         {
-            _weapon = new Weapon();
-            _weapon.Copy(weapon);
+            _session = ServiceLocator.Fetch<SessionService>();
             InitializeComponent();
         }
     }

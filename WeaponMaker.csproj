@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{1CD2A00D-D0B5-4C53-A918-6A8D4E6BC891}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>WeaponName</RootNamespace>
+    <RootNamespace>WeaponMaker</RootNamespace>
     <AssemblyName>WeaponMaker</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -111,9 +111,15 @@
       <DependentUpon>EditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="FileSystemService.cs" />
+    <Compile Include="Pages\ProjectEditPage.xaml.cs">
+      <DependentUpon>ProjectEditPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Services\SessionService.cs" />
+    <Compile Include="Source\Services\IService.cs" />
+    <Compile Include="Source\Services\ServiceLocator.cs" />
     <Compile Include="Weapon.cs" />
     <Compile Include="Project.cs" />
-    <Compile Include="WeaponEditPage.xaml.cs">
+    <Compile Include="Pages\WeaponEditPage.xaml.cs">
       <DependentUpon>WeaponEditPage.xaml</DependentUpon>
     </Compile>
     <Page Include="EditWindow.xaml">
@@ -132,7 +138,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="WeaponEditPage.xaml">
+    <Page Include="Pages\ProjectEditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\WeaponEditPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -178,6 +188,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="plastic-duck.ico" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\school-bag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\gamepad.png" />
+    <Resource Include="Resources\luger.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

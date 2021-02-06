@@ -25,13 +25,10 @@
                     <Separator />
                     <MenuItem Header="_Exit" />
                 </MenuItem>
-                <MenuItem Header="_Tools">
-                    <MenuItem Header="_Manage users">
-                        <!-- <MenuItem.Icon>
-                            <Image Source="/WpfTutorialSamples;component/Images/user.png" />
-                        </MenuItem.Icon>/-->
-                    </MenuItem>
-                    <MenuItem Header="_Show groups" IsCheckable="True" IsChecked="True" />
+                
+                <MenuItem Header="_View">
+                    <MenuItem Header="_Weapons" Click="HandleWeaponsEditViewClicked" />
+                    <MenuItem Header="_Project" Click="HandleProjectEditViewClicked"/>
                 </MenuItem>
             </Menu>
             <TextBox AcceptsReturn="True" />
