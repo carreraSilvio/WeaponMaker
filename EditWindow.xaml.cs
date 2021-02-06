@@ -33,27 +33,24 @@ namespace WeaponMaker
             InitializeComponent();
 
             _weaponEditPage = new WeaponEditPage();
+            _projectEditPage = new ProjectEditPage();
             _mainFrame.Navigate(_weaponEditPage);
         }
 
-        private void HandleExportJsonClicked(object sender, RoutedEventArgs e)
+        #region New/Open/Save
+        private void HandleNewProjectClicked(object sender, RoutedEventArgs e)
         {
-            FileSystemService.ExportWeapon(_weaponEditPage.Weapon);
-        }
-
-        private void HandleImportJsonClicked(object sender, RoutedEventArgs e)
-        {
-            var result = FileSystemService.ImportWeapon();
-            if(result.success)
+            var newProject = new Project();
+            if (FileSystemService.SaveProject(newProject))
             {
-                _weaponEditPage.Weapon.Copy(result.weapon);
+                _session.Project = newProject;
             }
         }
 
         private void HandleOpenProjectClicked(object sender, RoutedEventArgs e)
         {
             var result = FileSystemService.OpenProject();
-            if(result.success)
+            if (result.success)
             {
                 _session.Project = result.project;
             }
@@ -62,17 +59,36 @@ namespace WeaponMaker
         private void HandleSaveProjectClicked(object sender, RoutedEventArgs e)
         {
             FileSystemService.SaveProject(_session.Project);
+        } 
+        #endregion
+
+        #region Export/Import
+        private void HandleExportJsonClicked(object sender, RoutedEventArgs e)
+        {
+            FileSystemService.ExportWeapon(_weaponEditPage.Weapon);
         }
 
+        private void HandleImportJsonClicked(object sender, RoutedEventArgs e)
+        {
+            var result = FileSystemService.ImportWeapon();
+            if (result.success)
+            {
+                _weaponEditPage.Weapon.Copy(result.weapon);
+            }
+        } 
+        #endregion
+
+        #region View Clicked
         private void HandleWeaponsEditViewClicked(object sender, RoutedEventArgs e)
         {
-
+            _mainFrame.Navigate(_weaponEditPage);
         }
 
         private void HandleProjectEditViewClicked(object sender, RoutedEventArgs e)
         {
-
-        }
+            _mainFrame.Navigate(_projectEditPage);
+        } 
+        #endregion
     }
 
 }

@@ -19,10 +19,14 @@ namespace WeaponMaker
 
         private void HandleNewProjectClicked(object sender, RoutedEventArgs e)
         {
-            var editWindow = new EditWindow();
-            editWindow.Show();
+            var newProject = new Project();
+            if (FileSystemService.SaveProject(newProject))
+            { 
+                var editWindow = new EditWindow();
+                editWindow.Show();
 
-            Close();
+                Close();
+            }
         }
 
         private void HandleOpenProjectClicked(object sender, RoutedEventArgs e)
@@ -34,9 +38,9 @@ namespace WeaponMaker
                 session.Project = result.project;
                 var editWindow = new EditWindow();
                 editWindow.Show();
-            }
 
-            Close();
+                Close();
+            }
         }
     }
 }

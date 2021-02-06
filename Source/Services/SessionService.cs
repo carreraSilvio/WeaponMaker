@@ -12,19 +12,19 @@ namespace WeaponMaker
         public Project Project
         {
             get => _project;
-            set => _project = value;
+            set => _project.Copy(value);
         }
 
-        private Weapon _currentWeapon;
         public Weapon CurrentWeapon
         {
-            get => _currentWeapon;
-            set => _currentWeapon = value;
+            //TODO Edit this later
+            get => _project.FirstWeapon;
+            set => _project.FirstWeapon = value;
         }
+
         public SessionService()
         {
             _project = new Project();
-            _currentWeapon = new Weapon();
         }
 
     }

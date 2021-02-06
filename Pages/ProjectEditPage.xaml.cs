@@ -20,8 +20,17 @@ namespace WeaponMaker
     /// </summary>
     public partial class ProjectEditPage : Page
     {
+        private SessionService _session;
+
+        public Project Project
+        {
+            get => _session.Project;
+            set => _session.Project.Copy(value);
+        }
+
         public ProjectEditPage()
         {
+            _session = ServiceLocator.Fetch<SessionService>();
             InitializeComponent();
         }
     }

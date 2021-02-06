@@ -5,10 +5,26 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WeaponMaker"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="ProjectEditPage">
+      d:DesignHeight="450" 
+      d:DesignWidth="800"
+      Title="ProjectEditPage"
+      x:Name="_this">
 
     <Grid>
-        
+
+        <Label 
+            Content="Name" 
+            HorizontalAlignment="Left" 
+            Margin="10,30,0,0" 
+            VerticalAlignment="Top"/>
+        <TextBox 
+            HorizontalAlignment="Left" 
+            Height="23" 
+            Margin="10,56,0,0" 
+            TextWrapping="Wrap"
+            Text="{Binding ElementName=_this, Path=Project.Name, UpdateSourceTrigger=LostFocus}" 
+            VerticalAlignment="Top" 
+            Width="120" />
+
     </Grid>
 </Page>

@@ -34,7 +34,7 @@
             <TextBox AcceptsReturn="True" />
         </DockPanel>
         <DockPanel>
-            <Frame x:Name="_mainFrame" />
+            <Frame x:Name="_mainFrame" NavigationUIVisibility="Hidden"/>
         </DockPanel>
     </Grid>
 </Window>

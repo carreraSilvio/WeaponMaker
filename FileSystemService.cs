@@ -49,7 +49,7 @@ namespace WeaponMaker
             return result;
         }
 
-        public static void SaveProject(Project project)
+        public static bool SaveProject(Project project)
         {
             var fileDialog = new SaveFileDialog
             {
@@ -58,6 +58,7 @@ namespace WeaponMaker
                 Filter = "Weapon Maker Project files (*.wmprj)|*.wmprj"
             };
             var dialogResult = fileDialog.ShowDialog();
+            var success = false;
             switch (dialogResult)
             {
                 case System.Windows.Forms.DialogResult.OK:
@@ -69,6 +70,7 @@ namespace WeaponMaker
                             sw.WriteLine(output);
                         }
                         System.Windows.MessageBox.Show($"Saved {project.Name}!", "Success");
+                        success = true;
                     }
                     catch (Exception exception)
                     {
@@ -79,6 +81,7 @@ namespace WeaponMaker
                 default:
                     break;
             }
+            return success;
         }
 
         public static void ExportWeapon(Weapon weapon)
