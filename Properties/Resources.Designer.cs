@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WeaponName.Properties {
+namespace WeaponMaker.Properties {
     using System;
     
     

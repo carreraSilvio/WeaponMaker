@@ -18,58 +18,14 @@
         <DockPanel>
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
-                    <MenuItem Header="_New"  />
+                    <MenuItem Header="_New"  Click="HandleNewProjectClicked"/>
                     <MenuItem Header="_Open" Click="HandleOpenProjectClicked"/>
-                    <MenuItem Header="_Save" Click="HandleSaveProjectClicked" />
-                    <MenuItem Header="_Export" Click="HandleExportJsonClicked" />
-                    <MenuItem Header="_Import" Click="HandleImportJsonClicked" />
                     <Separator />
                     <MenuItem Header="_Exit" />
-                </MenuItem>
-                <MenuItem Header="_Tools">
-                    <MenuItem Header="_Manage users">
-                        <!-- <MenuItem.Icon>
-                            <Image Source="/WpfTutorialSamples;component/Images/user.png" />
-                        </MenuItem.Icon>/-->
-                    </MenuItem>
-                    <MenuItem Header="_Show groups" IsCheckable="True" IsChecked="True" />
                 </MenuItem>
             </Menu>
             <TextBox AcceptsReturn="True" />
         </DockPanel>
-        <Label 
-            Content="Name" 
-            HorizontalAlignment="Left" 
-            Margin="10,30,0,0" 
-            VerticalAlignment="Top"/>
-        <TextBox 
-            HorizontalAlignment="Left" 
-            Height="23" 
-            Margin="10,56,0,0" 
-            TextWrapping="Wrap"
-            Text="{Binding ElementName=_this, Path=Weapon.WeaponName, UpdateSourceTrigger=LostFocus}" 
-            VerticalAlignment="Top" 
-            Width="120" />
-
-        <Label Content="Rate of Fire" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top"/>
-        <TextBox 
-            HorizontalAlignment="Left" 
-            Height="23" 
-            Margin="10,111,0,0" 
-            TextWrapping="Wrap"
-            Text="{Binding ElementName=_this, Path=Weapon.RateOfFire, UpdateSourceTrigger=LostFocus}" 
-            VerticalAlignment="Top" 
-            Width="120" />
-
-        <Label Content="Damage" HorizontalAlignment="Left" Margin="10,143,0,0" VerticalAlignment="Top"/>
-        <TextBox 
-            HorizontalAlignment="Left" 
-            Height="23" 
-            Margin="10,169,0,0" 
-            TextWrapping="Wrap"
-            Text="{Binding ElementName=_this, Path=Weapon.Damage, UpdateSourceTrigger=LostFocus}"
-            VerticalAlignment="Top" 
-            Width="120" />
 
     </Grid>
 </Window>

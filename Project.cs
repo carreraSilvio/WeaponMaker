@@ -6,12 +6,14 @@ using System.Reflection;
 namespace WeaponMaker
 {
     /// <summary>
-    /// Represents the whole set of weappon data for a game
+    /// Represents a weapon maker project
     /// </summary>
     public class Project
     {
         private string name;
         private List<Weapon> _weapons;
         private List<string> _weaponTypes;
+
+        public string Name { get => name; set => name = value; }
     }
 }
