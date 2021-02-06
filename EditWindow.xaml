@@ -13,7 +13,6 @@
         MaxWidth="350"
         MaxHeight="300"
         x:Name="_this">
-
     <Grid>
         <DockPanel>
             <Menu DockPanel.Dock="Top">
@@ -37,39 +36,8 @@
             </Menu>
             <TextBox AcceptsReturn="True" />
         </DockPanel>
-        <Label 
-            Content="Name" 
-            HorizontalAlignment="Left" 
-            Margin="10,30,0,0" 
-            VerticalAlignment="Top"/>
-        <TextBox 
-            HorizontalAlignment="Left" 
-            Height="23" 
-            Margin="10,56,0,0" 
-            TextWrapping="Wrap"
-            Text="{Binding ElementName=_this, Path=Weapon.WeaponName, UpdateSourceTrigger=LostFocus}" 
-            VerticalAlignment="Top" 
-            Width="120" />
-
-        <Label Content="Rate of Fire" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top"/>
-        <TextBox 
-            HorizontalAlignment="Left" 
-            Height="23" 
-            Margin="10,111,0,0" 
-            TextWrapping="Wrap"
-            Text="{Binding ElementName=_this, Path=Weapon.RateOfFire, UpdateSourceTrigger=LostFocus}" 
-            VerticalAlignment="Top" 
-            Width="120" />
-
-        <Label Content="Damage" HorizontalAlignment="Left" Margin="10,143,0,0" VerticalAlignment="Top"/>
-        <TextBox 
-            HorizontalAlignment="Left" 
-            Height="23" 
-            Margin="10,169,0,0" 
-            TextWrapping="Wrap"
-            Text="{Binding ElementName=_this, Path=Weapon.Damage, UpdateSourceTrigger=LostFocus}"
-            VerticalAlignment="Top" 
-            Width="120" />
-
+        <DockPanel>
+            <Frame x:Name="_mainFrame" />
+        </DockPanel>
     </Grid>
 </Window>

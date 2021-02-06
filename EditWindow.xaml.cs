@@ -36,6 +36,8 @@ namespace WeaponMaker
             set => _project = value;
         }
 
+        private WeaponEditPage _weaponEditPage;
+
         public EditWindow()
         {
             _project = new Project();
@@ -48,63 +50,22 @@ namespace WeaponMaker
             _project = project;
             _weapon = new Weapon();
             InitializeComponent();
+
+            _weaponEditPage = new WeaponEditPage(_weapon);
+            _mainFrame.Navigate(_weaponEditPage);
         }
 
         private void HandleExportJsonClicked(object sender, RoutedEventArgs e)
         {
-            var fileDialog = new SaveFileDialog
-            {
-                FileName = _weapon.WeaponName,
-                DefaultExt = ".json",
-                Filter = "Json files (*.json)|*.json"
-            };
-            var result = fileDialog.ShowDialog();
-            switch (result)
-            {
-                case System.Windows.Forms.DialogResult.OK:
-                    try
-                    {
-                        string output = JsonConvert.SerializeObject(_weapon, Formatting.Indented);
-                        using (StreamWriter sw = new StreamWriter(fileDialog.FileName))
-                        {
-                            sw.WriteLine(output);
-                        }
-                        System.Windows.MessageBox.Show($"Sucess exporting {_weapon.WeaponName}!", "Success");
-                    }
-                    catch (Exception exception)
-                    {
-                        System.Windows.MessageBox.Show($"{exception.Message}", "Error");
-                    }
-                    break;
-                case System.Windows.Forms.DialogResult.Cancel:
-                default:
-                    break;
-            }
+            FileSystemService.ExportWeapon(_weaponEditPage.Weapon);
         }
 
         private void HandleImportJsonClicked(object sender, RoutedEventArgs e)
         {
-            var fileDialog = new OpenFileDialog
+            var result = FileSystemService.ImportWeapon();
+            if(result.success)
             {
-                FileName = _weapon.WeaponName,
-                DefaultExt = ".json",
-                Filter = "Json files (*.json)|*.json"
-            };
-            var result = fileDialog.ShowDialog();
-            switch (result)
-            {
-                case System.Windows.Forms.DialogResult.OK:
-                    string input = "";
-                    using (StreamReader sw = new StreamReader(fileDialog.FileName))
-                    {
-                        input = sw.ReadToEnd();
-                    }
-                    var weapon = JsonConvert.DeserializeObject<Weapon>(input);
-                    _weapon.Copy(weapon);
-                    break;
-                case System.Windows.Forms.DialogResult.Cancel:
-                default:
-                    break;
+                _weaponEditPage.Weapon.Copy(result.weapon);
             }
         }
 

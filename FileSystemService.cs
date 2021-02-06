@@ -80,6 +80,67 @@ namespace WeaponMaker
                     break;
             }
         }
+
+        public static void ExportWeapon(Weapon weapon)
+        {
+            var fileDialog = new SaveFileDialog
+            {
+                FileName = weapon.WeaponName,
+                DefaultExt = ".json",
+                Filter = "Json files (*.json)|*.json"
+            };
+            var dialogResult = fileDialog.ShowDialog();
+            switch (dialogResult)
+            {
+                case System.Windows.Forms.DialogResult.OK:
+                    try
+                    {
+                        string output = JsonConvert.SerializeObject(weapon, Formatting.Indented);
+                        using (StreamWriter sw = new StreamWriter(fileDialog.FileName))
+                        {
+                            sw.WriteLine(output);
+                        }
+                        System.Windows.MessageBox.Show($"Sucess exporting {weapon.WeaponName}!", "Success");
+                    }
+                    catch (Exception exception)
+                    {
+                        System.Windows.MessageBox.Show($"{exception.Message}", "Error");
+                    }
+                    break;
+                case System.Windows.Forms.DialogResult.Cancel:
+                default:
+                    break;
+            }
+        }
+
+        public static (bool success, Weapon weapon) ImportWeapon()
+        {
+            (bool success, Weapon weapon) result = (false, null);
+            var fileDialog = new OpenFileDialog
+            {
+                FileName = "",
+                DefaultExt = ".json",
+                Filter = "Json files (*.json)|*.json"
+            };
+            var dialogResult = fileDialog.ShowDialog();
+            switch (dialogResult)
+            {
+                case System.Windows.Forms.DialogResult.OK:
+                    string input = "";
+                    using (StreamReader sw = new StreamReader(fileDialog.FileName))
+                    {
+                        input = sw.ReadToEnd();
+                    }
+                    var weapon = JsonConvert.DeserializeObject<Weapon>(input);
+                    result.weapon = weapon;
+                    result.success = true;
+                    break;
+                case System.Windows.Forms.DialogResult.Cancel:
+                default:
+                    break;
+            }
+            return result;
+        }
     }
 
 }
