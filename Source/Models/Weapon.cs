@@ -6,18 +6,18 @@ namespace WeaponMaker
 {
     public class Weapon : INotifyPropertyChanged
     {
-        private string _weaponName = "Pistol";
+        private string _name = "Weapon";
 
-        public string WeaponName
+        public string Name
         {
             get
             {
-                return _weaponName;
+                return _name;
             }
             set
             {
-                _weaponName = value;
-                RaisePropertyChanged(nameof(WeaponName));
+                _name = value;
+                RaisePropertyChanged(nameof(Name));
             }
         }
 

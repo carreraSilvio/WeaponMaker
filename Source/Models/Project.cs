@@ -23,13 +23,20 @@ namespace WeaponMaker
                 RaisePropertyChanged(nameof(Name));
             }
         }
-        public Weapon FirstWeapon { get => _weapons[0]; set => _weapons[0].Copy(value); }
+        public List<Weapon> Weapons { get => _weapons; set => _weapons = value; }
 
         public Project()
         {
             _weapons = new List<Weapon>
             {
                 new Weapon()
+                {
+                    Name = "Pistol"
+                },
+                new Weapon()
+                {
+                    Name = "Shotgun"
+                }
             };
             _name = "Project Name";
         }

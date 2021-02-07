@@ -88,7 +88,7 @@ namespace WeaponMaker
         {
             var fileDialog = new SaveFileDialog
             {
-                FileName = weapon.WeaponName,
+                FileName = weapon.Name,
                 DefaultExt = ".json",
                 Filter = "Json files (*.json)|*.json"
             };
@@ -103,7 +103,7 @@ namespace WeaponMaker
                         {
                             sw.WriteLine(output);
                         }
-                        System.Windows.MessageBox.Show($"Sucess exporting {weapon.WeaponName}!", "Success");
+                        System.Windows.MessageBox.Show($"Sucess exporting {weapon.Name}!", "Success");
                     }
                     catch (Exception exception)
                     {

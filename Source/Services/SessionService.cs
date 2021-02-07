@@ -17,10 +17,11 @@ namespace WeaponMaker
 
         public Weapon CurrentWeapon
         {
-            //TODO Edit this later
-            get => _project.FirstWeapon;
-            set => _project.FirstWeapon = value;
+            get => _project.Weapons[CurrentWeaponIndex];
+            set => _project.Weapons[CurrentWeaponIndex].Copy(value);
         }
+
+        public int CurrentWeaponIndex { get; set; } = 0;
 
         public SessionService()
         {
