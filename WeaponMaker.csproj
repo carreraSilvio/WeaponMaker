@@ -107,26 +107,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="EditWindow.xaml.cs">
+    <Compile Include="Views\EditWindow.xaml.cs">
       <DependentUpon>EditWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FileSystemService.cs" />
-    <Compile Include="Pages\ProjectEditPage.xaml.cs">
+    <Compile Include="Source\Services\FileSystemService.cs" />
+    <Compile Include="Views\ProjectEditPage.xaml.cs">
       <DependentUpon>ProjectEditPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Source\Services\SessionService.cs" />
     <Compile Include="Source\Services\IService.cs" />
     <Compile Include="Source\Services\ServiceLocator.cs" />
-    <Compile Include="Weapon.cs" />
-    <Compile Include="Project.cs" />
-    <Compile Include="Pages\WeaponEditPage.xaml.cs">
+    <Compile Include="Source\Models\Weapon.cs" />
+    <Compile Include="Source\Models\Project.cs" />
+    <Compile Include="Views\WeaponEditPage.xaml.cs">
       <DependentUpon>WeaponEditPage.xaml</DependentUpon>
     </Compile>
-    <Page Include="EditWindow.xaml">
+    <Page Include="Views\EditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -134,15 +134,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\ProjectEditPage.xaml">
+    <Page Include="Views\ProjectEditPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\WeaponEditPage.xaml">
+    <Page Include="Views\WeaponEditPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
