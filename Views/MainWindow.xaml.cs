@@ -12,6 +12,12 @@ namespace WeaponMaker
     /// </summary>
     public partial class MainWindow : Window
     {
+        private NewProjectCommand _newProjectCommand = new NewProjectCommand();
+        public NewProjectCommand NewProjectCommand  => _newProjectCommand;
+
+        private MessageCommand _messageCommand = new MessageCommand();
+        public MessageCommand MessageCommand => _messageCommand;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -21,11 +27,10 @@ namespace WeaponMaker
         {
             var newProject = new Project();
             if (FileSystemService.SaveProject(newProject))
-            { 
+            {
+                Close();
                 var editWindow = new EditWindow();
                 editWindow.Show();
-
-                Close();
             }
         }
 

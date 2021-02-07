@@ -107,6 +107,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\MessageCommand.cs" />
+    <Compile Include="Commands\NewProjectCommand.cs" />
     <Compile Include="Views\EditWindow.xaml.cs">
       <DependentUpon>EditWindow.xaml</DependentUpon>
     </Compile>
