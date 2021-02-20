@@ -16,7 +16,21 @@ namespace WeaponMaker
 
         public override bool Execute(object parameter = null)
         {
-            var newProject = new Project();
+            var newProject = new Project() 
+            {
+                Name = "Project Name",
+                Weapons = new List<Weapon>
+                {
+                    new Weapon()
+                    {
+                        Name = "Pistol"
+                    },
+                    new Weapon()
+                    {
+                        Name = "Shotgun"
+                    }
+                }
+            };
             if (FileSystemService.SaveProjectAs(newProject))
             {
                 var session = ServiceLocator.Fetch<SessionService>();

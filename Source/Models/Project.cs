@@ -30,26 +30,15 @@ namespace WeaponMaker
 
         public Project()
         {
-            _weapons = new List<Weapon>
-            {
-                new Weapon()
-                {
-                    Name = "Pistol"
-                },
-                new Weapon()
-                {
-                    Name = "Shotgun"
-                }
-            };
-            _name = "Project Name";
+           
         }
 
-        public void Copy(Project otherWeapon)
+        public void Copy(Project otherProject)
         {
             PropertyInfo[] properties = typeof(Project).GetProperties();
             foreach (PropertyInfo property in properties)
             {
-                property.SetValue(this, property.GetValue(otherWeapon));
+                property.SetValue(this, property.GetValue(otherProject));
             }
         }
 
