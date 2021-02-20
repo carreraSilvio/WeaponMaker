@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace WeaponMaker
 {
-    public class NewProjectCommand
+    public class OpenProjectCommand
     {
         public class Args
         {
@@ -16,7 +16,7 @@ namespace WeaponMaker
             public Type target;
         }
 
-        public NewProjectCommand()
+        public OpenProjectCommand()
         {
         }
 
@@ -24,13 +24,14 @@ namespace WeaponMaker
         {
             var args = parameter as Args;
             var window = args.caller;
-            var newProject = new Project();
-            if (FileSystemService.SaveProject(newProject))
+            var result = FileSystemService.OpenProject();
+            if (result.success)
             {
                 var session = ServiceLocator.Fetch<SessionService>();
-                session.Project = newProject;
-                var editWindow = new EditWindow(); //use type of target
+                session.Project = result.project;
+                var editWindow = new EditWindow();
                 editWindow.Show();
+
                 window.Close();
             }
         }

@@ -12,11 +12,11 @@ namespace WeaponMaker
     /// </summary>
     public partial class MainWindow : Window
     {
-        private NewProjectCommand _newProjectCommand = new NewProjectCommand();
-        public NewProjectCommand NewProjectCommand  => _newProjectCommand;
-
         private MessageCommand _messageCommand = new MessageCommand();
         public MessageCommand MessageCommand => _messageCommand;
+
+        private NewProjectCommand _newProjectCommand = new NewProjectCommand();
+        private OpenProjectCommand _openProjectCommand = new OpenProjectCommand();
 
         public MainWindow()
         {
@@ -25,27 +25,22 @@ namespace WeaponMaker
 
         private void HandleNewProjectClicked(object sender, RoutedEventArgs e)
         {
-            var newProject = new Project();
-            if (FileSystemService.SaveProject(newProject))
+            var args = new NewProjectCommand.Args()
             {
-                Close();
-                var editWindow = new EditWindow();
-                editWindow.Show();
-            }
+                caller = this,
+                target = typeof(EditWindow)
+            };
+            _newProjectCommand.Execute(args);
         }
 
         private void HandleOpenProjectClicked(object sender, RoutedEventArgs e)
         {
-            var result = FileSystemService.OpenProject();
-            if(result.success)
+            var args = new OpenProjectCommand.Args()
             {
-                var session = ServiceLocator.Fetch<SessionService>();
-                session.Project = result.project;
-                var editWindow = new EditWindow();
-                editWindow.Show();
-
-                Close();
-            }
+                caller = this,
+                target = typeof(EditWindow)
+            };
+            _openProjectCommand.Execute(args);
         }
     }
 }

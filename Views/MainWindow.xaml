@@ -18,7 +18,7 @@
         <DockPanel>
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
-                    <MenuItem Header="_New"  Command="{Binding MessageCommand}" CommandParameter="{Binding ElementName=_this}" />
+                    <MenuItem Header="_New"  Click="HandleNewProjectClicked" />
                     <MenuItem Header="_Open" Click="HandleOpenProjectClicked"/>
                     <Separator />
                     <MenuItem Header="_Exit" />
