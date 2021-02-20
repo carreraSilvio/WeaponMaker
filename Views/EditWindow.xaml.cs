@@ -22,10 +22,12 @@ namespace WeaponMaker
     /// </summary>
     public partial class EditWindow : Window
     {
-        private SessionService _session;
 
         private WeaponEditPage _weaponEditPage;
         private ProjectEditPage _projectEditPage;
+
+        private SessionService _session;
+        private CommandService _commandService;
 
         public EditWindow()
         {
@@ -35,41 +37,46 @@ namespace WeaponMaker
             _weaponEditPage = new WeaponEditPage();
             _projectEditPage = new ProjectEditPage();
             _mainFrame.Navigate(_weaponEditPage);
+
+            _commandService = ServiceLocator.Fetch<CommandService>();
         }
 
         #region New/Open/Save
         private void HandleNewProjectClicked(object sender, RoutedEventArgs e)
         {
-            CommandService commandService = ServiceLocator.Fetch<CommandService>();
-            if (commandService.Get<NewProjectCommand>().Execute())
+            if (_commandService.Get<NewProjectCommand>().Execute())
             {
                 var args = new NavigateToCommand.Args()
                 {
                     caller = this,
                     target = typeof(EditWindow)
                 };
-                commandService.Get<NavigateToCommand>().Execute(args);
+                _commandService.Get<NavigateToCommand>().Execute(args);
             }
         }
 
         private void HandleOpenProjectClicked(object sender, RoutedEventArgs e)
         {
-            CommandService commandService = ServiceLocator.Fetch<CommandService>();
-            if (commandService.Get<OpenProjectCommand>().Execute())
+            if (_commandService.Get<OpenProjectCommand>().Execute())
             {
                 var args = new NavigateToCommand.Args()
                 {
                     caller = this,
                     target = typeof(EditWindow)
                 };
-                commandService.Get<NavigateToCommand>().Execute(args);
+                _commandService.Get<NavigateToCommand>().Execute(args);
             }
         }
 
         private void HandleSaveProjectClicked(object sender, RoutedEventArgs e)
         {
-            FileSystemService.SaveProjectAs(_session.Project);
-        } 
+            _commandService.Get<SaveProjectCommand>().Execute();
+        }
+
+        private void HandleSaveProjectAsClicked(object sender, RoutedEventArgs e)
+        {
+            _commandService.Get<SaveProjectAsCommand>().Execute();
+        }
         #endregion
 
         #region Export/Import

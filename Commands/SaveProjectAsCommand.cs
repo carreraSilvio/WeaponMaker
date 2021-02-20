@@ -10,20 +10,13 @@ namespace WeaponMaker
 {
     public class SaveProjectAsCommand : Command
     {
-        public class Args
-        {
-            public Window caller;
-            public Type target;
-        }
 
         public SaveProjectAsCommand()
         {
         }
 
-        public override bool Execute(object parameter)
+        public override bool Execute(object parameter = null)
         {
-            var args = parameter as Args;
-            var window = args.caller;
             var result = FileSystemService.OpenProject();
             if (result.success)
             {

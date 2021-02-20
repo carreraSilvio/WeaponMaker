@@ -18,9 +18,10 @@
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
                     <MenuItem Header="_New"  />
-                    <MenuItem Header="_Open" Click="HandleOpenProjectClicked"/>
+                    <MenuItem Header="_Open..." Click="HandleOpenProjectClicked"/>
                     <MenuItem Header="_Save" Click="HandleSaveProjectClicked" />
-                    <MenuItem Header="_Export" Click="HandleExportJsonClicked" />
+                    <MenuItem Header="_Save as..." Click="HandleSaveProjectAsClicked"/>
+                    <MenuItem Header="_Export..." Click="HandleExportJsonClicked" />
                     <MenuItem Header="_Import" Click="HandleImportJsonClicked" />
                     <Separator />
                     <MenuItem Header="_Exit" />
