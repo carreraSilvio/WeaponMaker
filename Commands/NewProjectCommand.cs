@@ -8,31 +8,22 @@ using System.Windows.Input;
 
 namespace WeaponMaker
 {
-    public class NewProjectCommand
+    public class NewProjectCommand : Command
     {
-        public class Args
-        {
-            public Window caller;
-            public Type target;
-        }
-
         public NewProjectCommand()
         {
         }
 
-        public void Execute(object parameter)
+        public override bool Execute(object parameter = null)
         {
-            var args = parameter as Args;
-            var window = args.caller;
             var newProject = new Project();
-            if (FileSystemService.SaveProject(newProject))
+            if (FileSystemService.SaveProjectAs(newProject))
             {
                 var session = ServiceLocator.Fetch<SessionService>();
                 session.Project = newProject;
-                var editWindow = new EditWindow(); //use type of target
-                editWindow.Show();
-                window.Close();
+                return true;
             }
+            return false;
         }
     }
 }

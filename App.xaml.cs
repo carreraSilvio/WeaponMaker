@@ -17,6 +17,17 @@ namespace WeaponMaker
         {
             var session = new SessionService();
             ServiceLocator.Add(session);
+            var commander = new CommandService();
+            commander.AddRange(
+                new Command[]
+                {
+                    new NewProjectCommand(),
+                    new OpenProjectCommand(),
+                    new SaveProjectAsCommand(),
+                    new SaveProjectCommand(),
+                    new NavigateToCommand()
+                });
+            ServiceLocator.Add(commander);
         }
     }
 }

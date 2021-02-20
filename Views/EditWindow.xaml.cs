@@ -40,25 +40,35 @@ namespace WeaponMaker
         #region New/Open/Save
         private void HandleNewProjectClicked(object sender, RoutedEventArgs e)
         {
-            var newProject = new Project();
-            if (FileSystemService.SaveProject(newProject))
+            CommandService commandService = ServiceLocator.Fetch<CommandService>();
+            if (commandService.Get<NewProjectCommand>().Execute())
             {
-                _session.Project = newProject;
+                var args = new NavigateToCommand.Args()
+                {
+                    caller = this,
+                    target = typeof(EditWindow)
+                };
+                commandService.Get<NavigateToCommand>().Execute(args);
             }
         }
 
         private void HandleOpenProjectClicked(object sender, RoutedEventArgs e)
         {
-            var result = FileSystemService.OpenProject();
-            if (result.success)
+            CommandService commandService = ServiceLocator.Fetch<CommandService>();
+            if (commandService.Get<OpenProjectCommand>().Execute())
             {
-                _session.Project = result.project;
+                var args = new NavigateToCommand.Args()
+                {
+                    caller = this,
+                    target = typeof(EditWindow)
+                };
+                commandService.Get<NavigateToCommand>().Execute(args);
             }
         }
 
         private void HandleSaveProjectClicked(object sender, RoutedEventArgs e)
         {
-            FileSystemService.SaveProject(_session.Project);
+            FileSystemService.SaveProjectAs(_session.Project);
         } 
         #endregion
 

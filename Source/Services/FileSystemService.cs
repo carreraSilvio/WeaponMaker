@@ -31,17 +31,18 @@ namespace WeaponMaker
             var dialogResult = fileDialog.ShowDialog();
             switch (dialogResult)
             {
-                case System.Windows.Forms.DialogResult.OK:
+                case DialogResult.OK:
                     string input = "";
                     using (StreamReader sw = new StreamReader(fileDialog.FileName))
                     {
                         input = sw.ReadToEnd();
                     }
                     var project = JsonConvert.DeserializeObject<Project>(input);
+                    project.Path = fileDialog.FileName;
                     result.success = true;
                     result.project = project;
                     break;
-                case System.Windows.Forms.DialogResult.Cancel:
+                case DialogResult.Cancel:
                 default:
                     break;
             }
@@ -50,6 +51,25 @@ namespace WeaponMaker
         }
 
         public static bool SaveProject(Project project)
+        {
+            try
+            {
+                string output = JsonConvert.SerializeObject(project, Formatting.Indented);
+                using (StreamWriter sw = new StreamWriter(project.Path))
+                {
+                    sw.WriteLine(output);
+                }
+                System.Windows.MessageBox.Show($"Saved {project.Name}!", "Success");
+                return true;
+            }
+            catch (Exception exception)
+            {
+                System.Windows.MessageBox.Show($"{exception.Message}", "Error");
+                return false;
+            }        
+        }
+
+        public static bool SaveProjectAs(Project project)
         {
             var fileDialog = new SaveFileDialog
             {
@@ -70,6 +90,7 @@ namespace WeaponMaker
                             sw.WriteLine(output);
                         }
                         System.Windows.MessageBox.Show($"Saved {project.Name}!", "Success");
+                        project.Path = fileDialog.FileName;
                         success = true;
                     }
                     catch (Exception exception)

@@ -17,9 +17,26 @@ using System.Windows.Shapes;
 
 namespace WeaponMaker
 {
-    public class CommandService
+    public class CommandService : IService
     {
+        private static Dictionary<Type, Command> _commands = new Dictionary<Type, Command>();
+
+        public void AddRange<T>(IEnumerable<T> commands)
+        {
+            foreach(var command in commands)
+            {
+                _commands.Add(command.GetType(), command as Command);
+            }
+        }
+
+        public void Add(Command command)
+        {
+            _commands.Add(command.GetType(), command);
+        }
+
+        public T Get<T>() where T : Command
+        {
+            return (T)_commands[typeof(T)];
+        }
     }
-
-
 }

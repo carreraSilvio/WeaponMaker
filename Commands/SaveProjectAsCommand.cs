@@ -8,14 +8,22 @@ using System.Windows.Input;
 
 namespace WeaponMaker
 {
-    public class OpenProjectCommand : Command
+    public class SaveProjectAsCommand : Command
     {
-        public OpenProjectCommand()
+        public class Args
+        {
+            public Window caller;
+            public Type target;
+        }
+
+        public SaveProjectAsCommand()
         {
         }
 
-        public override bool Execute(object parameter = null)
+        public override bool Execute(object parameter)
         {
+            var args = parameter as Args;
+            var window = args.caller;
             var result = FileSystemService.OpenProject();
             if (result.success)
             {

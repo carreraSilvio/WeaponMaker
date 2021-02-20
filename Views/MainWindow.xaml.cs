@@ -15,9 +15,6 @@ namespace WeaponMaker
         private MessageCommand _messageCommand = new MessageCommand();
         public MessageCommand MessageCommand => _messageCommand;
 
-        private NewProjectCommand _newProjectCommand = new NewProjectCommand();
-        private OpenProjectCommand _openProjectCommand = new OpenProjectCommand();
-
         public MainWindow()
         {
             InitializeComponent();
@@ -25,22 +22,30 @@ namespace WeaponMaker
 
         private void HandleNewProjectClicked(object sender, RoutedEventArgs e)
         {
-            var args = new NewProjectCommand.Args()
+            CommandService commandService = ServiceLocator.Fetch<CommandService>();
+            if (commandService.Get<NewProjectCommand>().Execute())
             {
-                caller = this,
-                target = typeof(EditWindow)
-            };
-            _newProjectCommand.Execute(args);
+                var args = new NavigateToCommand.Args()
+                {
+                    caller = this,
+                    target = typeof(EditWindow)
+                };
+                commandService.Get<NavigateToCommand>().Execute(args);
+            }
         }
 
         private void HandleOpenProjectClicked(object sender, RoutedEventArgs e)
         {
-            var args = new OpenProjectCommand.Args()
+            CommandService commandService = ServiceLocator.Fetch<CommandService>();
+            if (commandService.Get<OpenProjectCommand>().Execute())
             {
-                caller = this,
-                target = typeof(EditWindow)
-            };
-            _openProjectCommand.Execute(args);
+                var args = new NavigateToCommand.Args()
+                {
+                    caller = this,
+                    target = typeof(EditWindow)
+                };
+                commandService.Get<NavigateToCommand>().Execute(args);
+            }
         }
     }
 }

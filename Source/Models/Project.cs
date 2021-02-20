@@ -25,6 +25,9 @@ namespace WeaponMaker
         }
         public List<Weapon> Weapons { get => _weapons; set => _weapons = value; }
 
+        private string _path;
+        public string Path { get => _path; set => _path = value; }
+
         public Project()
         {
             _weapons = new List<Weapon>
