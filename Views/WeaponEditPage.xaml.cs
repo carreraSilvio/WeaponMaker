@@ -34,9 +34,10 @@ namespace WeaponMaker
             _session = ServiceLocator.Fetch<SessionService>();
             InitializeComponent();
             WeaponListBox.ItemsSource = _session.Project.Weapons;
+            WeaponListBox.SelectedItem = WeaponListBox.Items.GetItemAt(0);
         }
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void WeaponListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             _session.CurrentWeaponIndex = WeaponListBox.Items.IndexOf(e.AddedItems[0]);
             RaisePropertyChanged(nameof(Weapon));
@@ -49,12 +50,12 @@ namespace WeaponMaker
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void HandleAddButtonClicked(object sender, RoutedEventArgs e)
+        private void AddButton_Clicked(object sender, RoutedEventArgs e)
         {
             _session.Project.Weapons.Add(new Weapon() { Name = "New Weapon" });
         }
 
-        private void HandleRemoveButtonClicked(object sender, RoutedEventArgs e)
+        private void RemoveButton_Clicked(object sender, RoutedEventArgs e)
         {
             if (_session.Project.Weapons.Count == 1) return;
             _session.Project.Weapons.RemoveAt(_session.Project.Weapons.Count - 1);

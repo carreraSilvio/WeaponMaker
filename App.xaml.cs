@@ -25,7 +25,9 @@ namespace WeaponMaker
                     new OpenProjectCommand(),
                     new SaveProjectAsCommand(),
                     new SaveProjectCommand(),
-                    new NavigateToCommand()
+                    new NavigateToCommand(),
+                    new ExportProjectCommand(),
+                    new ExportWeaponCommand()
                 });
             ServiceLocator.Add(commander);
         }

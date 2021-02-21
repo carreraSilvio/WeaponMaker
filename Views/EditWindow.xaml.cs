@@ -79,21 +79,10 @@ namespace WeaponMaker
         }
         #endregion
 
-        #region Export/Import
-        private void HandleExportJsonClicked(object sender, RoutedEventArgs e)
+        private void Export_Clicked(object sender, RoutedEventArgs e)
         {
-            FileSystemService.ExportWeapon(_weaponEditPage.Weapon);
+            _commandService.Get<ExportProjectCommand>().Execute(_session.Project);
         }
-
-        private void HandleImportJsonClicked(object sender, RoutedEventArgs e)
-        {
-            var result = FileSystemService.ImportWeapon();
-            if (result.success)
-            {
-                _weaponEditPage.Weapon.Copy(result.weapon);
-            }
-        } 
-        #endregion
 
         #region View Clicked
         private void HandleWeaponsEditViewClicked(object sender, RoutedEventArgs e)

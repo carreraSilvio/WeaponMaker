@@ -105,11 +105,15 @@ namespace WeaponMaker
             return success;
         }
 
-        public static void ExportWeapon(Weapon weapon)
+        public static bool ExportAsJson<T>(T target, string fileName = default)
         {
+            if(fileName == default)
+            {
+                fileName = typeof(T).Name;
+            }
             var fileDialog = new SaveFileDialog
             {
-                FileName = weapon.Name,
+                FileName = fileName,
                 DefaultExt = ".json",
                 Filter = "Json files (*.json)|*.json"
             };
@@ -119,12 +123,13 @@ namespace WeaponMaker
                 case System.Windows.Forms.DialogResult.OK:
                     try
                     {
-                        string output = JsonConvert.SerializeObject(weapon, Formatting.Indented);
+                        string output = JsonConvert.SerializeObject(target, Formatting.Indented);
                         using (StreamWriter sw = new StreamWriter(fileDialog.FileName))
                         {
                             sw.WriteLine(output);
                         }
-                        System.Windows.MessageBox.Show($"Sucess exporting {weapon.Name}!", "Success");
+                        System.Windows.MessageBox.Show($"Sucess exporting {fileDialog.FileName}!", "Success");
+                        return true;
                     }
                     catch (Exception exception)
                     {
@@ -135,6 +140,7 @@ namespace WeaponMaker
                 default:
                     break;
             }
+            return false;
         }
 
         public static (bool success, Weapon weapon) ImportWeapon()
