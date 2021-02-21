@@ -55,12 +55,15 @@ namespace WeaponMaker
         private void AddButton_Clicked(object sender, RoutedEventArgs e)
         {
             _session.Project.Weapons.Add(new Weapon() { Name = "New Weapon" });
+            UpdateRemoveButton();
         }
 
         private void RemoveButton_Clicked(object sender, RoutedEventArgs e)
         {
             if (_session.Project.Weapons.Count == 1) return;
             _session.Project.Weapons.RemoveAt(_session.Project.Weapons.Count - 1);
+
+            UpdateRemoveButton();
         }
 
         private void MoveUp_Clicked(object sender, RoutedEventArgs e)
@@ -73,7 +76,24 @@ namespace WeaponMaker
             _session.Project.Weapons.RemoveAt(selectedIndex);
             _session.Project.Weapons.Insert(selectedIndex - 1, itemToMoveUp);
             _session.CurrentWeaponIndex= selectedIndex - 1;
-            
+        }
+
+        private void MoveDown_Clicked(object sender, RoutedEventArgs e)
+        {
+            if (WeaponListBox.SelectedIndex >= WeaponListBox.Items.Count - 1) return;
+
+            var selectedIndex = WeaponListBox.SelectedIndex;
+
+            var itemToMoveDown = _session.Project.Weapons[selectedIndex];
+            _session.Project.Weapons.RemoveAt(selectedIndex);
+            _session.Project.Weapons.Insert(selectedIndex + 1, itemToMoveDown);
+            _session.CurrentWeaponIndex = selectedIndex + 1;
+        }
+
+        private void UpdateRemoveButton()
+        {
+            var hasOneItem = _session.Project.Weapons.Count == 1;
+            RemoveWeaponBtn.IsEnabled = !hasOneItem;
         }
     }
 }
