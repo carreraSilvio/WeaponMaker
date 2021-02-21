@@ -14,7 +14,11 @@
         MaxHeight="300"
         x:Name="_this">
     <Grid>
-        <DockPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="161*"/>
+            <ColumnDefinition Width="181*"/>
+        </Grid.ColumnDefinitions>
+        <DockPanel Margin="0,0,0,240" Grid.ColumnSpan="2">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
                     <MenuItem Header="_New"  />
@@ -26,15 +30,15 @@
                     <Separator />
                     <MenuItem Header="_Exit" />
                 </MenuItem>
-                
+
                 <MenuItem Header="_View">
                     <MenuItem Header="_Weapons" Click="HandleWeaponsEditViewClicked" />
                     <MenuItem Header="_Project" Click="HandleProjectEditViewClicked"/>
                 </MenuItem>
             </Menu>
-            <TextBox AcceptsReturn="True" />
+
         </DockPanel>
-        <DockPanel>
+        <DockPanel Margin="0,23,0,0" Grid.ColumnSpan="2">
             <Frame x:Name="_mainFrame" NavigationUIVisibility="Hidden"/>
         </DockPanel>
     </Grid>

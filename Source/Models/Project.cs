@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Reflection;
 
@@ -11,7 +12,7 @@ namespace WeaponMaker
     public class Project : INotifyPropertyChanged
     {
         private string _name;
-        private List<Weapon> _weapons;
+        private ObservableCollection<Weapon> _weapons;
         private List<string> _weaponTypes;
 
         public string Name
@@ -23,7 +24,7 @@ namespace WeaponMaker
                 RaisePropertyChanged(nameof(Name));
             }
         }
-        public List<Weapon> Weapons { get => _weapons; set => _weapons = value; }
+        public ObservableCollection<Weapon> Weapons { get => _weapons; set => _weapons = value; }
 
         private string _path;
         public string Path { get => _path; set => _path = value; }
