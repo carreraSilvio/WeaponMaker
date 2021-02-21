@@ -28,5 +28,10 @@ namespace WeaponMaker
             _project = new Project();
         }
 
+        public void Clear()
+        {
+            CurrentWeaponIndex = 0;
+        }
+
     }
 }

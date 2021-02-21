@@ -49,9 +49,15 @@ namespace WeaponMaker
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void HandleAddButtonClicked(object sender, RoutedEventArgs e)
         {
             _session.Project.Weapons.Add(new Weapon() { Name = "New Weapon" });
+        }
+
+        private void HandleRemoveButtonClicked(object sender, RoutedEventArgs e)
+        {
+            if (_session.Project.Weapons.Count == 1) return;
+            _session.Project.Weapons.RemoveAt(_session.Project.Weapons.Count - 1);
         }
     }
 }

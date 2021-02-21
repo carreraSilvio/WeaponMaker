@@ -20,6 +20,7 @@ namespace WeaponMaker
             if (result.success)
             {
                 var session = ServiceLocator.Fetch<SessionService>();
+                session.Clear();
                 session.Project = result.project;
                 return true;
             }
