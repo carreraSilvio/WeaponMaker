@@ -39,6 +39,8 @@ namespace WeaponMaker
 
         private void WeaponListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (e.AddedItems.Count == 0) return; //Happen when you remove an item
+
             _session.CurrentWeaponIndex = WeaponListBox.Items.IndexOf(e.AddedItems[0]);
             RaisePropertyChanged(nameof(Weapon));
         }
@@ -59,6 +61,19 @@ namespace WeaponMaker
         {
             if (_session.Project.Weapons.Count == 1) return;
             _session.Project.Weapons.RemoveAt(_session.Project.Weapons.Count - 1);
+        }
+
+        private void MoveUp_Clicked(object sender, RoutedEventArgs e)
+        {
+            if(WeaponListBox.SelectedIndex <= 0) return;
+
+            var selectedIndex = WeaponListBox.SelectedIndex;
+
+            var itemToMoveUp = _session.Project.Weapons[selectedIndex];
+            _session.Project.Weapons.RemoveAt(selectedIndex);
+            _session.Project.Weapons.Insert(selectedIndex - 1, itemToMoveUp);
+            _session.CurrentWeaponIndex= selectedIndex - 1;
+            
         }
     }
 }

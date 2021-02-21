@@ -18,6 +18,11 @@
             Margin="5,0,0,0" 
             VerticalAlignment="Top"/>
             <ListBox Name="WeaponListBox" DockPanel.Dock="Left" Width="100" Margin="0,25,0,25" SelectionChanged="WeaponListBox_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                <ListBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Move up" Click="MoveUp_Clicked"/>
+                    </ContextMenu>
+                </ListBox.ContextMenu>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="0,2">
