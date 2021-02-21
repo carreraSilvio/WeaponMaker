@@ -21,6 +21,8 @@
                     <MenuItem Header="_New"  Click="HandleNewProjectClicked" />
                     <MenuItem Header="_Open" Click="HandleOpenProjectClicked"/>
                     <Separator />
+                    <MenuItem Header="_Preferences" Click="Preferences_Clicked"/>
+                    <Separator />
                     <MenuItem Header="_Exit" />
                 </MenuItem>
             </Menu>

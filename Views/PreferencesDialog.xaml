@@ -1,0 +1,29 @@
+﻿<Window x:Class="WeaponMaker.PreferencesDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Preferences" MaxHeight="250" 
+        MaxWidth="340" Width="340"
+        x:Name="_this">
+    <Grid Margin="0,5,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Label  
+            Grid.Column="0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top"
+            Content="Load Last Project on StartUp" 
+            />
+        <CheckBox 
+            Grid.Column="1" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" 
+            Margin="0,5,0,0"
+            IsChecked="{Binding ElementName=_this, Path=LoadLastProjectOnStartUp, Mode=TwoWay}" 
+            />
+    </Grid>
+</Window>

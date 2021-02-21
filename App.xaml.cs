@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -30,6 +31,11 @@ namespace WeaponMaker
                     new ExportWeaponCommand()
                 });
             ServiceLocator.Add(commander);
+
+            var prefService = new PreferencesService();
+            ServiceLocator.Add(prefService);
+
+            session.Project.PropertyChanged += prefService.Project_Changed;
         }
     }
 }

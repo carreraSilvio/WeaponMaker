@@ -116,12 +116,17 @@
     <Compile Include="Commands\SaveProjectCommand.cs" />
     <Compile Include="Commands\WPFSystem\MessageCommand.cs" />
     <Compile Include="Commands\NewProjectCommand.cs" />
+    <Compile Include="Source\Models\Preferences.cs" />
     <Compile Include="Source\Services\Command.cs" />
     <Compile Include="Source\Services\CommandService.cs" />
+    <Compile Include="Source\Services\PreferencesService.cs" />
     <Compile Include="Views\EditWindow.xaml.cs">
       <DependentUpon>EditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Source\Services\FileSystemService.cs" />
+    <Compile Include="Views\PreferencesDialog.xaml.cs">
+      <DependentUpon>PreferencesDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ProjectEditPage.xaml.cs">
       <DependentUpon>ProjectEditPage.xaml</DependentUpon>
     </Compile>
@@ -149,6 +154,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\PreferencesDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ProjectEditPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

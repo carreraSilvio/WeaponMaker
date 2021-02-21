@@ -22,6 +22,10 @@ namespace WeaponMaker
                 var session = ServiceLocator.Fetch<SessionService>();
                 session.Clear();
                 session.Project = result.project;
+
+                var prefService = ServiceLocator.Fetch<PreferencesService>();
+                prefService.Preferences.LastProjectName = session.Project.Name;
+                prefService.Preferences.LastProjectPath = session.Project.Path;
                 return true;
             }
             return false;

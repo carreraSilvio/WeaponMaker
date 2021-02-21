@@ -123,11 +123,7 @@ namespace WeaponMaker
                 case System.Windows.Forms.DialogResult.OK:
                     try
                     {
-                        string output = JsonConvert.SerializeObject(target, Formatting.Indented);
-                        using (StreamWriter sw = new StreamWriter(fileDialog.FileName))
-                        {
-                            sw.WriteLine(output);
-                        }
+                        SaveToJson(target, fileDialog.FileName);
                         System.Windows.MessageBox.Show($"Sucess exporting {fileDialog.FileName}!", "Success");
                         return true;
                     }
@@ -141,6 +137,22 @@ namespace WeaponMaker
                     break;
             }
             return false;
+        }
+
+        public static void SaveToJson<T>(T target, string fileName = default)
+        {
+            try
+            {
+                string output = JsonConvert.SerializeObject(target, Formatting.Indented);
+                using (StreamWriter sw = new StreamWriter(fileName))
+                {
+                    sw.WriteLine(output);
+                }
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
         }
 
         public static (bool success, Weapon weapon) ImportWeapon()

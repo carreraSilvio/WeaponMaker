@@ -14,7 +14,6 @@ namespace WeaponMaker
         private string _name;
         private ObservableCollection<Weapon> _weapons;
         private List<string> _weaponTypes;
-
         public string Name
         {
             get => _name;

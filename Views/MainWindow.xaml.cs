@@ -47,5 +47,11 @@ namespace WeaponMaker
                 commandService.Get<NavigateToCommand>().Execute(args);
             }
         }
+
+        private void Preferences_Clicked(object sender, RoutedEventArgs e)
+        {
+            PreferencesDialog preferences = new PreferencesDialog();
+            preferences.ShowDialog();
+        }
     }
 }
