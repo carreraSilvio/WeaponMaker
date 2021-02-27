@@ -18,9 +18,25 @@ namespace WeaponMaker
         public MainWindow()
         {
             InitializeComponent();
+            PreferencesService preferencesService = ServiceLocator.Fetch<PreferencesService>();
+            if (!preferencesService.Preferences.LoadLastProjectOnStartUp)
+            {
+                return;
+            }
+
+            CommandService commandService = ServiceLocator.Fetch<CommandService>();
+            if (commandService.Get<LoadProjectCommand>().Execute(preferencesService.Preferences.LastProjectPath))
+            {
+                var args = new NavigateToCommand.Args()
+                {
+                    caller = this,
+                    target = typeof(EditWindow)
+                };
+                commandService.Get<NavigateToCommand>().Execute(args);
+            }
         }
 
-        private void HandleNewProjectClicked(object sender, RoutedEventArgs e)
+        private void NewProject_Clicked(object sender, RoutedEventArgs e)
         {
             CommandService commandService = ServiceLocator.Fetch<CommandService>();
             if (commandService.Get<NewProjectCommand>().Execute())
@@ -34,7 +50,7 @@ namespace WeaponMaker
             }
         }
 
-        private void HandleOpenProjectClicked(object sender, RoutedEventArgs e)
+        private void OpenProject_Clicked(object sender, RoutedEventArgs e)
         {
             CommandService commandService = ServiceLocator.Fetch<CommandService>();
             if (commandService.Get<OpenProjectCommand>().Execute())
@@ -52,6 +68,12 @@ namespace WeaponMaker
         {
             PreferencesDialog preferences = new PreferencesDialog();
             preferences.ShowDialog();
+        }
+
+        private void Exit_Clicked(object sender, RoutedEventArgs e)
+        {
+            var commandService = ServiceLocator.Fetch<CommandService>();
+            commandService.Get<ShutdownCommand>().Execute();
         }
     }
 }

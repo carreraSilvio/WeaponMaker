@@ -24,9 +24,16 @@ namespace WeaponMaker
             }
         }
         public ObservableCollection<Weapon> Weapons { get => _weapons; set => _weapons = value; }
-
-        private string _path;
-        public string Path { get => _path; set => _path = value; }
+        public string _path { get; set; }
+        public string Path
+        {
+            get => _path;
+            set
+            {
+                _path = value;
+                RaisePropertyChanged(nameof(Path));
+            }
+        }
 
         public Project()
         {

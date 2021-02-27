@@ -14,6 +14,7 @@ namespace WeaponMaker
         public Preferences Preferences { get; set; }
 
         private string _preferencesFilePath;
+        public string PreferencesFilePath { get => _preferencesFilePath; }
 
         private const string PREFERENCES_FOLDER = "Preferences";
         private const string PREFERENCES_FILE_NAME = "preferencesData.json";
@@ -48,18 +49,13 @@ namespace WeaponMaker
             Preferences = rawPrefs ?? new Preferences();
         }
 
-        internal void PreferencesDialog_Closed(object sender, CancelEventArgs e)
-        {
-            FileSystemService.SaveToJson(Preferences, _preferencesFilePath);
-        }
-
         internal void Project_Changed(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName != "Name" && e.PropertyName != "Path") return;
 
             var project = sender as Project;
-            Preferences.LastProjectName = project.Name;
-            Preferences.LastProjectPath = project.Path;
+            Preferences.LastProjectName = project.Name ?? Preferences.LastProjectName;
+            Preferences.LastProjectPath = project.Path ?? Preferences.LastProjectPath;
 
             FileSystemService.SaveToJson(Preferences, _preferencesFilePath);
         }

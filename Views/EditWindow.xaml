@@ -27,7 +27,9 @@
                     <MenuItem Header="_Save as..." Click="HandleSaveProjectAsClicked"/>
                     <MenuItem Header="_Export..." Click="Export_Clicked" />
                     <Separator />
-                    <MenuItem Header="_Exit" />
+                    <MenuItem Header="_Preferences" Click="Preferences_Clicked"/>
+                    <Separator />
+                    <MenuItem Header="_Exit" Click="Exit_Clicked"/>
                 </MenuItem>
 
                 <MenuItem Header="_View">

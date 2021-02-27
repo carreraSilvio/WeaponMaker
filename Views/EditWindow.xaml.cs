@@ -84,6 +84,12 @@ namespace WeaponMaker
             _commandService.Get<ExportProjectCommand>().Execute(_session.Project);
         }
 
+        private void Preferences_Clicked(object sender, RoutedEventArgs e)
+        {
+            PreferencesDialog preferences = new PreferencesDialog();
+            preferences.ShowDialog();
+        }
+
         #region View Clicked
         private void HandleWeaponsEditViewClicked(object sender, RoutedEventArgs e)
         {
@@ -93,8 +99,14 @@ namespace WeaponMaker
         private void HandleProjectEditViewClicked(object sender, RoutedEventArgs e)
         {
             _mainFrame.Navigate(_projectEditPage);
-        } 
+        }
         #endregion
+
+        private void Exit_Clicked(object sender, RoutedEventArgs e)
+        {
+            var commandService = ServiceLocator.Fetch<CommandService>();
+            commandService.Get<ShutdownCommand>().Execute();
+        }
     }
 
 }

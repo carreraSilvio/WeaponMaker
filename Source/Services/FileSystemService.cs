@@ -32,19 +32,34 @@ namespace WeaponMaker
             switch (dialogResult)
             {
                 case DialogResult.OK:
-                    string input = "";
-                    using (StreamReader sw = new StreamReader(fileDialog.FileName))
-                    {
-                        input = sw.ReadToEnd();
-                    }
-                    var project = JsonConvert.DeserializeObject<Project>(input);
-                    project.Path = fileDialog.FileName;
-                    result.success = true;
-                    result.project = project;
-                    break;
+                    return LoadProject(fileDialog.FileName);
                 case DialogResult.Cancel:
                 default:
                     break;
+            }
+
+            return result;
+        }
+
+        public static (bool success, Project project) LoadProject(string filePath)
+        {
+            (bool success, Project project) result = default;
+
+            try
+            {
+                string input = "";
+                using (StreamReader sw = new StreamReader(filePath))
+                {
+                    input = sw.ReadToEnd();
+                    var project = JsonConvert.DeserializeObject<Project>(input);
+                    project.Path = filePath;
+                    result.success = true;
+                    result.project = project;
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
 
             return result;

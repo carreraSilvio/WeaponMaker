@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,7 @@ namespace WeaponMaker
     /// </summary>
     public partial class PreferencesDialog : Window
     {
-        private PreferencesService _preferencesService;
+        private readonly PreferencesService _preferencesService;
 
         public bool LoadLastProjectOnStartUp
         {
@@ -33,9 +34,14 @@ namespace WeaponMaker
         public PreferencesDialog()
         {
             _preferencesService = ServiceLocator.Fetch<PreferencesService>();
-            Closing += _preferencesService.PreferencesDialog_Closed;
+            Closing += PreferencesDialog_Closing;
 
             InitializeComponent();
+        }
+
+        internal void PreferencesDialog_Closing(object sender, CancelEventArgs e)
+        {
+            FileSystemService.SaveToJson(_preferencesService.Preferences, _preferencesService.PreferencesFilePath);
         }
     }
 }
