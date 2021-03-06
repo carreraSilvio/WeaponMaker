@@ -22,7 +22,7 @@ namespace WeaponMaker
     public partial class WeaponEditPage : Page, INotifyPropertyChanged
     {
         private SessionService _session;
-      
+
         public Weapon Weapon
         {
             get => _session.CurrentWeapon;
@@ -61,7 +61,7 @@ namespace WeaponMaker
         private void AddButton_Clicked(object sender, RoutedEventArgs e)
         {
             _session.Project.Weapons.Add(new Weapon() { Name = "New Weapon" });
-            UpdateRemoveButton();
+            UpdateRemoveButtons();
         }
 
         private void RemoveButton_Clicked(object sender, RoutedEventArgs e)
@@ -69,12 +69,22 @@ namespace WeaponMaker
             if (_session.Project.Weapons.Count == 1) return;
             _session.Project.Weapons.RemoveAt(_session.Project.Weapons.Count - 1);
 
-            UpdateRemoveButton();
+            UpdateRemoveButtons();
         }
 
-        private void MoveUp_Clicked(object sender, RoutedEventArgs e)
+        #region Context Menu Handlers
+
+        private void CtxMenu_Delete_Clicked(object sender, RoutedEventArgs e)
         {
-            if(WeaponListBox.SelectedIndex <= 0) return;
+            if (_session.Project.Weapons.Count == 1) return;
+            _session.Project.Weapons.RemoveAt(WeaponListBox.SelectedIndex);
+
+            UpdateRemoveButtons();
+        }
+
+        private void CtxMenu_MoveUp_Clicked(object sender, RoutedEventArgs e)
+        {
+            if (WeaponListBox.SelectedIndex <= 0) return;
 
             var selectedIndex = WeaponListBox.SelectedIndex;
 
@@ -84,7 +94,7 @@ namespace WeaponMaker
             _session.CurrentWeaponIndex = selectedIndex - 1;
         }
 
-        private void MoveDown_Clicked(object sender, RoutedEventArgs e)
+        private void CtxMenu_MoveDown_Clicked(object sender, RoutedEventArgs e)
         {
             if (WeaponListBox.SelectedIndex >= WeaponListBox.Items.Count - 1) return;
 
@@ -94,12 +104,14 @@ namespace WeaponMaker
             _session.Project.Weapons.RemoveAt(selectedIndex);
             _session.Project.Weapons.Insert(selectedIndex + 1, itemToMoveDown);
             _session.CurrentWeaponIndex = selectedIndex + 1;
-        }
+        } 
+        #endregion
 
-        private void UpdateRemoveButton()
+        private void UpdateRemoveButtons()
         {
             var hasOneItem = _session.Project.Weapons.Count == 1;
             RemoveWeaponBtn.IsEnabled = !hasOneItem;
+            CtxMenuRemoveWeapon.IsEnabled = !hasOneItem;
         }
     }
 }

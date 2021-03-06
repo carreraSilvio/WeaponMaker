@@ -21,8 +21,10 @@
             <ListBox Name="WeaponListBox" DockPanel.Dock="Left" Width="100" Margin="0,25,0,25" SelectionChanged="WeaponListBox_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
                 <ListBox.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Move up" Click="MoveUp_Clicked"/>
-                        <MenuItem Header="Move down" Click="MoveDown_Clicked"/>
+                        <MenuItem Name="CtxMenuRemoveWeapon" Header="Remove" Click="CtxMenu_Delete_Clicked"/>
+                        <Separator/>
+                        <MenuItem Header="Move up" Click="CtxMenu_MoveUp_Clicked"/>
+                        <MenuItem Header="Move down" Click="CtxMenu_MoveDown_Clicked"/>
                     </ContextMenu>
                 </ListBox.ContextMenu>
                 <ListBox.ItemTemplate>
