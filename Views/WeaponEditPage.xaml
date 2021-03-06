@@ -17,8 +17,11 @@
             HorizontalAlignment="Left" 
             Margin="5,0,0,0" 
             VerticalAlignment="Top"/>
-        
-            <ListBox Name="WeaponListBox" DockPanel.Dock="Left" Width="100" Margin="0,25,0,25" SelectionChanged="WeaponListBox_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+
+            <ListBox Name="WeaponListBox" DockPanel.Dock="Left" Width="100" Margin="0,25,0,25" SelectionChanged="WeaponListBox_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
+                     PreviewMouseLeftButtonDown="WeaponListBox_PreviewMouseLeftButtonDown"
+                     Drop="WeaponListBox_Drop" 
+                     AllowDrop="True">
                 <ListBox.ContextMenu>
                     <ContextMenu>
                         <MenuItem Name="CtxMenuRemoveWeapon" Header="Remove" Click="CtxMenu_Delete_Clicked"/>
