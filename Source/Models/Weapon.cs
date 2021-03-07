@@ -4,6 +4,7 @@ using System.Reflection;
 
 namespace WeaponMaker
 {
+    [Serializable]
     public class Weapon : INotifyPropertyChanged
     {
         private string _name = "Weapon";

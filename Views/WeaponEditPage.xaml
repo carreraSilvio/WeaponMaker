@@ -13,7 +13,7 @@
     <DockPanel LastChildFill="True">
         <Grid>
             <Label 
-            Content="Weapons" 
+            Content="{Binding ElementName=_this, Path=IsConnected}" 
             HorizontalAlignment="Left" 
             Margin="5,0,0,0" 
             VerticalAlignment="Top"/>
@@ -24,6 +24,12 @@
                      AllowDrop="True">
                 <ListBox.ContextMenu>
                     <ContextMenu>
+                        <MenuItem Header="Copy" Click="CtxMenu_Copy_Clicked" />
+                        <MenuItem 
+                            Header="Paste" 
+                            Click="CtxMenu_Paste_Clicked" 
+                            IsEnabled="{Binding ElementName=_this, Path=IsConnected, FallbackValue=false}"
+                        />
                         <MenuItem Name="CtxMenuRemoveWeapon" Header="Remove" Click="CtxMenu_Delete_Clicked"/>
                         <Separator/>
                         <MenuItem Header="Move up" Click="CtxMenu_MoveUp_Clicked"/>
@@ -56,7 +62,7 @@
             HorizontalAlignment="Left" 
             Margin="10,45,0,0" 
             TextWrapping="Wrap"
-            Text="{Binding ElementName=_this, Path=Weapon.Name, UpdateSourceTrigger=LostFocus}" 
+            Text="{Binding ElementName=_this, Path=CurrentWeapon.Name, UpdateSourceTrigger=LostFocus}" 
             VerticalAlignment="Top" 
             Width="120" />
 
@@ -65,7 +71,7 @@
             HorizontalAlignment="Left" 
             Margin="10,90,0,0" 
             TextWrapping="Wrap"
-            Text="{Binding ElementName=_this, Path=Weapon.RateOfFire, UpdateSourceTrigger=LostFocus}" 
+            Text="{Binding ElementName=_this, Path=CurrentWeapon.RateOfFire, UpdateSourceTrigger=LostFocus}" 
             VerticalAlignment="Top" 
             Width="120" />
 
@@ -74,7 +80,7 @@
             HorizontalAlignment="Left" 
             Margin="10,135,0,0" 
             TextWrapping="Wrap"
-            Text="{Binding ElementName=_this, Path=Weapon.Damage, UpdateSourceTrigger=LostFocus}"
+            Text="{Binding ElementName=_this, Path=CurrentWeapon.Damage, UpdateSourceTrigger=LostFocus}"
             VerticalAlignment="Top" 
             Width="120" />
 

@@ -23,7 +23,7 @@ namespace WeaponMaker
     {
         private SessionService _session;
 
-        public Weapon Weapon
+        public Weapon CurrentWeapon
         {
             get => _session.CurrentWeapon;
             set => _session.CurrentWeapon = value;
@@ -48,7 +48,7 @@ namespace WeaponMaker
             {
                 _session.CurrentWeaponIndex = WeaponListBox.Items.IndexOf(e.AddedItems[0]);
             }
-            RaisePropertyChanged(nameof(Weapon));
+            RaisePropertyChanged(nameof(CurrentWeapon));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -80,6 +80,47 @@ namespace WeaponMaker
             _session.Project.Weapons.RemoveAt(WeaponListBox.SelectedIndex);
 
             UpdateRemoveButtons();
+        }
+
+        private void CtxMenu_Copy_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                Weapon copiedWeapon = new Weapon();
+                copiedWeapon.Copy(_session.CurrentWeapon);
+
+                Clipboard.SetData(typeof(Weapon).FullName, copiedWeapon);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private bool tst = true;
+        public string IsConnected
+        {
+            get
+            {
+                return tst.ToString();
+            }
+        }
+
+        private void CtxMenu_Paste_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                //Fetch value from clipboard
+                var copiedWeapon = Clipboard.GetData(typeof(Weapon).FullName) as Weapon;
+
+                //Set value
+                _session.CurrentWeapon.Copy(copiedWeapon);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void CtxMenu_MoveUp_Clicked(object sender, RoutedEventArgs e)
