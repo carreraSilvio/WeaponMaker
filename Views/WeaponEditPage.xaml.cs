@@ -82,20 +82,13 @@ namespace WeaponMaker
 
         #region Context Menu Handlers
 
-        private void CtxMenu_Delete_Clicked(object sender, RoutedEventArgs e)
-        {
-            if (_session.Project.Weapons.Count == 1) return;
-            _session.Project.Weapons.RemoveAt(WeaponListBox.SelectedIndex);
-
-            UpdateRemoveButtons();
-        }
-
-        private void CtxMenu_Copy_Clicked(object sender, EventArgs e)
+        private void CtxMenu_Cut_Clicked(object sender, EventArgs e)
         {
             try
             {
                 Weapon copiedWeapon = new Weapon();
                 copiedWeapon.Copy(_session.CurrentWeapon);
+                _session.CurrentWeapon.Clear();
 
                 Clipboard.SetData(typeof(Weapon).FullName, copiedWeapon);
 
@@ -108,16 +101,15 @@ namespace WeaponMaker
             }
         }
 
-        private void CtxMenu_Cut_Clicked(object sender, EventArgs e)
+        private void CtxMenu_Copy_Clicked(object sender, EventArgs e)
         {
             try
             {
                 Weapon copiedWeapon = new Weapon();
                 copiedWeapon.Copy(_session.CurrentWeapon);
-                _session.CurrentWeapon.Clear();
 
                 Clipboard.SetData(typeof(Weapon).FullName, copiedWeapon);
-                
+
                 //Update UI
                 UpdateHasDataInClipboard();
             }
@@ -154,6 +146,14 @@ namespace WeaponMaker
             copiedWeapon.Copy(_session.CurrentWeapon);
 
             _session.Project.Weapons.Insert(targetIndex, copiedWeapon);
+            UpdateRemoveButtons();
+        }
+        
+        private void CtxMenu_Delete_Clicked(object sender, RoutedEventArgs e)
+        {
+            if (_session.Project.Weapons.Count == 1) return;
+            _session.Project.Weapons.RemoveAt(WeaponListBox.SelectedIndex);
+
             UpdateRemoveButtons();
         }
 

@@ -24,22 +24,24 @@
                      AllowDrop="True">
                 <ListBox.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Copy" Click="CtxMenu_Copy_Clicked" />
                         <MenuItem Header="Cut" Click="CtxMenu_Cut_Clicked" />
+                        <MenuItem Header="Copy" Click="CtxMenu_Copy_Clicked" />
                         <MenuItem 
                             Header="Paste" 
                             Click="CtxMenu_Paste_Clicked"
                             Name="CtxMenu_Paste" 
                             IsEnabled="{Binding FallbackValue=false}"  
                         />
+                        
+                        <Separator/>
+                        <MenuItem Header="Duplicate" Click="CtxMenu_Duplicate_Clicked"/>
                         <MenuItem 
                             Header="Delete" 
                             Click="CtxMenu_Delete_Clicked"
                             Name="CtxMenu_Delete" 
                             />
                         <Separator/>
-                        <MenuItem Header="Duplicate" Click="CtxMenu_Duplicate_Clicked"/>
-                        <Separator/>
+                        
                         <MenuItem Header="Move up" Click="CtxMenu_MoveUp_Clicked"/>
                         <MenuItem Header="Move down" Click="CtxMenu_MoveDown_Clicked"/>
                     </ContextMenu>
