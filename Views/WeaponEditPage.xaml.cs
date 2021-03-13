@@ -62,6 +62,8 @@ namespace WeaponMaker
             RaisePropertyChanged(nameof(CurrentWeapon));
         }
 
+        #region Bottom Buttons Handlers
+
         private void AddButton_Clicked(object sender, RoutedEventArgs e)
         {
             _session.Project.Weapons.Add(new Weapon() { Name = "New Weapon" });
@@ -75,6 +77,8 @@ namespace WeaponMaker
 
             UpdateRemoveButtons();
         }
+
+        #endregion
 
         #region Context Menu Handlers
 
@@ -221,7 +225,7 @@ namespace WeaponMaker
         {
             var hasOneItem = _session.Project.Weapons.Count == 1;
             RemoveWeaponBtn.IsEnabled = !hasOneItem;
-            CtxMenuRemoveWeapon.IsEnabled = !hasOneItem;
+            CtxMenu_Delete.IsEnabled = !hasOneItem;
         }
 
         private void UpdateHasDataInClipboard()

@@ -30,9 +30,13 @@
                             Header="Paste" 
                             Click="CtxMenu_Paste_Clicked"
                             Name="CtxMenu_Paste" 
-                            IsEnabled="{Binding FallbackValue=false}"
+                            IsEnabled="{Binding FallbackValue=false}"  
                         />
-                        <MenuItem Name="CtxMenuRemoveWeapon" Header="Remove" Click="CtxMenu_Delete_Clicked"/>
+                        <MenuItem 
+                            Header="Delete" 
+                            Click="CtxMenu_Delete_Clicked"
+                            Name="CtxMenu_Delete" 
+                            />
                         <Separator/>
                         <MenuItem Header="Move up" Click="CtxMenu_MoveUp_Clicked"/>
                         <MenuItem Header="Move down" Click="CtxMenu_MoveDown_Clicked"/>
