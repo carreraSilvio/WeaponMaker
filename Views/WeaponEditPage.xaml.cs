@@ -147,6 +147,16 @@ namespace WeaponMaker
             }
         }
 
+        private void CtxMenu_Duplicate_Clicked(object sender, RoutedEventArgs e)
+        {
+            var targetIndex = _session.CurrentWeaponIndex;
+            Weapon copiedWeapon = new Weapon();
+            copiedWeapon.Copy(_session.CurrentWeapon);
+
+            _session.Project.Weapons.Insert(targetIndex, copiedWeapon);
+            UpdateRemoveButtons();
+        }
+
         private void CtxMenu_MoveUp_Clicked(object sender, RoutedEventArgs e)
         {
             if (WeaponListBox.SelectedIndex <= 0) return;

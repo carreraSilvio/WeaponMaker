@@ -38,6 +38,8 @@
                             Name="CtxMenu_Delete" 
                             />
                         <Separator/>
+                        <MenuItem Header="Duplicate" Click="CtxMenu_Duplicate_Clicked"/>
+                        <Separator/>
                         <MenuItem Header="Move up" Click="CtxMenu_MoveUp_Clicked"/>
                         <MenuItem Header="Move down" Click="CtxMenu_MoveDown_Clicked"/>
                     </ContextMenu>
