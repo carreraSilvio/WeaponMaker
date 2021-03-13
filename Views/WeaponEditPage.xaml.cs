@@ -98,12 +98,29 @@ namespace WeaponMaker
             }
         }
 
-        private bool tst = true;
-        public string IsConnected
+        private void CtxMenu_Cut_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                Weapon copiedWeapon = new Weapon();
+                copiedWeapon.Copy(_session.CurrentWeapon);
+                _session.CurrentWeapon.Clear();
+
+                Clipboard.SetData(typeof(Weapon).FullName, copiedWeapon);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+        public bool HasDataInClipboard
         {
             get
             {
-                return tst.ToString();
+                return Clipboard.ContainsData(typeof(Weapon).FullName);
             }
         }
 

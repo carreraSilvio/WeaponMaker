@@ -13,7 +13,7 @@
     <DockPanel LastChildFill="True">
         <Grid>
             <Label 
-            Content="{Binding ElementName=_this, Path=IsConnected}" 
+            Content="Weapons" 
             HorizontalAlignment="Left" 
             Margin="5,0,0,0" 
             VerticalAlignment="Top"/>
@@ -25,10 +25,11 @@
                 <ListBox.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Copy" Click="CtxMenu_Copy_Clicked" />
+                        <MenuItem Header="Cut" Click="CtxMenu_Cut_Clicked" />
                         <MenuItem 
                             Header="Paste" 
                             Click="CtxMenu_Paste_Clicked" 
-                            IsEnabled="{Binding ElementName=_this, Path=IsConnected, FallbackValue=false}"
+                            IsEnabled="{Binding ElementName=_this, Path=HasDataInClipboard, FallbackValue=true}"
                         />
                         <MenuItem Name="CtxMenuRemoveWeapon" Header="Remove" Click="CtxMenu_Delete_Clicked"/>
                         <Separator/>

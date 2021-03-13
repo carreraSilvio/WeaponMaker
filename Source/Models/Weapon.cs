@@ -66,5 +66,12 @@ namespace WeaponMaker
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public void Clear()
+        {
+            Name = "";
+            Damage = "0";
+            RateOfFire = "0";
+        }
     }
 }
