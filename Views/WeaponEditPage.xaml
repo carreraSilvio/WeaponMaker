@@ -28,8 +28,9 @@
                         <MenuItem Header="Cut" Click="CtxMenu_Cut_Clicked" />
                         <MenuItem 
                             Header="Paste" 
-                            Click="CtxMenu_Paste_Clicked" 
-                            IsEnabled="{Binding ElementName=_this, Path=HasDataInClipboard, FallbackValue=true}"
+                            Click="CtxMenu_Paste_Clicked"
+                            Name="CtxMenu_Paste" 
+                            IsEnabled="{Binding FallbackValue=false}"
                         />
                         <MenuItem Name="CtxMenuRemoveWeapon" Header="Remove" Click="CtxMenu_Delete_Clicked"/>
                         <Separator/>

@@ -29,6 +29,17 @@ namespace WeaponMaker
             set => _session.CurrentWeapon = value;
         }
 
+        #region INotifyPropertyChanged
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        
+        #endregion
+
         public WeaponEditPage()
         {
             _session = ServiceLocator.Fetch<SessionService>();
@@ -49,13 +60,6 @@ namespace WeaponMaker
                 _session.CurrentWeaponIndex = WeaponListBox.Items.IndexOf(e.AddedItems[0]);
             }
             RaisePropertyChanged(nameof(CurrentWeapon));
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void RaisePropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private void AddButton_Clicked(object sender, RoutedEventArgs e)
@@ -91,14 +95,14 @@ namespace WeaponMaker
 
                 Clipboard.SetData(typeof(Weapon).FullName, copiedWeapon);
 
+                //Update UI
+                UpdateHasDataInClipboard();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
-
-      
 
         private void CtxMenu_Cut_Clicked(object sender, EventArgs e)
         {
@@ -109,20 +113,13 @@ namespace WeaponMaker
                 _session.CurrentWeapon.Clear();
 
                 Clipboard.SetData(typeof(Weapon).FullName, copiedWeapon);
-
+                
+                //Update UI
+                UpdateHasDataInClipboard();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-        }
-
-
-        public bool HasDataInClipboard
-        {
-            get
-            {
-                return Clipboard.ContainsData(typeof(Weapon).FullName);
             }
         }
 
@@ -135,6 +132,10 @@ namespace WeaponMaker
 
                 //Set value
                 _session.CurrentWeapon.Copy(copiedWeapon);
+
+                //Update UI
+                Clipboard.Clear();
+                UpdateHasDataInClipboard();
             }
             catch (Exception ex)
             {
@@ -221,6 +222,13 @@ namespace WeaponMaker
             var hasOneItem = _session.Project.Weapons.Count == 1;
             RemoveWeaponBtn.IsEnabled = !hasOneItem;
             CtxMenuRemoveWeapon.IsEnabled = !hasOneItem;
+        }
+
+        private void UpdateHasDataInClipboard()
+        {
+            //TODO: Not pretty. The codebehind should not change 
+            //the UI directly but it's what we have for now.
+            CtxMenu_Paste.IsEnabled = Clipboard.ContainsData(typeof(Weapon).FullName);
         }
     }
 }
