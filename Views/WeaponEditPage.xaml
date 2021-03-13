@@ -54,6 +54,9 @@
             </Grid>
         </Grid>
         <Grid>
+            <Grid.CommandBindings>
+                <CommandBinding  Command="ApplicationCommands.Undo"/>
+            </Grid.CommandBindings>
             <Label 
             Content="Name" 
             HorizontalAlignment="Left" 

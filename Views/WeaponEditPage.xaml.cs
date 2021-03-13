@@ -98,6 +98,8 @@ namespace WeaponMaker
             }
         }
 
+      
+
         private void CtxMenu_Cut_Clicked(object sender, EventArgs e)
         {
             try
