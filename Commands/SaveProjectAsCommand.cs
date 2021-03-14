@@ -17,14 +17,8 @@ namespace WeaponMaker
 
         public override bool Execute(object parameter = null)
         {
-            var result = FileSystemService.OpenProject();
-            if (result.success)
-            {
-                var session = ServiceLocator.Fetch<SessionService>();
-                session.Project = result.project;
-                return true;
-            }
-            return false;
+            var project = ServiceLocator.Fetch<SessionService>().Project;
+            return FileSystemService.SaveProjectAs(project);
         }
     }
 }
