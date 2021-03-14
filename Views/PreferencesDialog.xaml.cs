@@ -31,6 +31,18 @@ namespace WeaponMaker
             set => _preferencesService.Preferences.LoadLastProjectOnStartUp = value;
         }
 
+        public bool AutoSave
+        {
+            get => _preferencesService.Preferences.AutoSave;
+            set => _preferencesService.Preferences.AutoSave = value;
+        }
+
+        public float AutoSaveFrequency
+        {
+            get => _preferencesService.Preferences.AutoSaveFrequency;
+            set => _preferencesService.Preferences.AutoSaveFrequency = value;
+        }
+
         public PreferencesDialog()
         {
             _preferencesService = ServiceLocator.Fetch<PreferencesService>();

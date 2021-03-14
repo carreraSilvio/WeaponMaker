@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Preferences" MaxHeight="250" 
+        Title="Preferences" MaxHeight="250" Height="250"
         MaxWidth="340" Width="340"
         x:Name="_this">
     <Grid Margin="0,5,0,0">
@@ -12,6 +12,11 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         <Label  
             Grid.Column="0" 
             HorizontalAlignment="Left" 
@@ -24,6 +29,38 @@
             VerticalAlignment="Top" 
             Margin="0,5,0,0"
             IsChecked="{Binding ElementName=_this, Path=LoadLastProjectOnStartUp, Mode=TwoWay}" 
+            />
+        <Label  
+            Grid.Column="0"
+            Grid.Row="1"
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top"
+            Content="Auto-Save"
+            />
+        <CheckBox 
+            Grid.Column="1"
+            Grid.Row="1"
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" 
+            Margin="0,5,0,0"
+            IsChecked="{Binding ElementName=_this, Path=LoadLastProjectOnStartUp, Mode=TwoWay}" 
+            />
+        <Label  
+            Grid.Column="0"
+            Grid.Row="2"
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top"
+            Content="  Frequency"
+            />
+        <TextBlock 
+            Grid.Column="1"
+            Grid.Row="2"
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" 
+            Margin="0,5,0,0"
+            Text="{Binding ElementName=_this, Path=AutoSaveFrequency, UpdateSourceTrigger=LostFocus}" 
+            Width="120"
+            TextWrapping="Wrap"
             />
     </Grid>
 </Window>
