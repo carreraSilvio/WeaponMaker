@@ -24,7 +24,7 @@ namespace WeaponMaker
             }
         }
         public ObservableCollection<Weapon> Weapons { get => _weapons; set => _weapons = value; }
-        public string _path { get; set; }
+        private string _path;
         public string Path
         {
             get => _path;
@@ -35,9 +35,19 @@ namespace WeaponMaker
             }
         }
 
+        private string _lastTimeSaved;
+        public string LastTimeSaved
+        {
+            get => _lastTimeSaved;
+            set
+            {
+                _lastTimeSaved = value;
+                RaisePropertyChanged(nameof(LastTimeSaved));
+            }
+        }
+
         public Project()
         {
-           
         }
 
         public void Copy(Project otherProject)

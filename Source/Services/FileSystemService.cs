@@ -74,7 +74,6 @@ namespace WeaponMaker
                 {
                     sw.WriteLine(output);
                 }
-                System.Windows.MessageBox.Show($"Saved {project.Name}!", "Success");
                 return true;
             }
             catch (Exception exception)

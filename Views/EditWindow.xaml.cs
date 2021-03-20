@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -20,14 +21,25 @@ namespace WeaponMaker
     /// <summary>
     /// Interaction logic for EditWindow.xaml
     /// </summary>
-    public partial class EditWindow : Window
+    public partial class EditWindow : Window, INotifyPropertyChanged
     {
+        public string StatusBarMessage
+        {
+            get => _statusBarMessage;
+            set
+            {
+                _statusBarMessage = value;
+                RaisePropertyChanged(nameof(StatusBarMessage));
+            }
+        }
 
-        private WeaponEditPage _weaponEditPage;
-        private ProjectEditPage _projectEditPage;
+        private string _statusBarMessage;
 
-        private SessionService _session;
-        private CommandService _commandService;
+        private readonly WeaponEditPage _weaponEditPage;
+        private readonly ProjectEditPage _projectEditPage;
+
+        private readonly SessionService _session;
+        private readonly CommandService _commandService;
 
         public EditWindow()
         {
@@ -39,6 +51,7 @@ namespace WeaponMaker
             _mainFrame.Navigate(_weaponEditPage);
 
             _commandService = ServiceLocator.Fetch<CommandService>();
+            StatusBarMessage = $"Loaded {_session.Project.Name} project";
         }
 
         #region New/Open/Save
@@ -70,21 +83,24 @@ namespace WeaponMaker
 
         private void HandleSaveProjectClicked(object sender, RoutedEventArgs e)
         {
-            _commandService.Get<SaveProjectCommand>().Execute();
+            var success = _commandService.Get<SaveProjectCommand>().Execute();
+            if (success)
+            {
+                StatusBarMessage = $"Saved {_session.Project.LastTimeSaved}";
+            }
         }
 
         private void HandleSaveProjectAsClicked(object sender, RoutedEventArgs e)
         {
             _commandService.Get<SaveProjectAsCommand>().Execute();
         }
-        #endregion
-
-        private void Export_Clicked(object sender, RoutedEventArgs e)
+        private void HandleExportClicked(object sender, RoutedEventArgs e)
         {
             _commandService.Get<ExportProjectCommand>().Execute(_session.Project);
         }
+        #endregion
 
-        private void Preferences_Clicked(object sender, RoutedEventArgs e)
+        private void HandlePreferencesClicked(object sender, RoutedEventArgs e)
         {
             PreferencesDialog preferences = new PreferencesDialog();
             preferences.ShowDialog();
@@ -107,6 +123,18 @@ namespace WeaponMaker
             var commandService = ServiceLocator.Fetch<CommandService>();
             commandService.Get<ShutdownCommand>().Execute();
         }
+
+        #region INotifyPropertyChanged
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
+
     }
 
 }

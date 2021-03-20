@@ -15,9 +15,9 @@
         x:Name="_this">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.06*"/>
+            <RowDefinition Height="0.07*"/>
             <RowDefinition Height="0.7*"/>
-            <RowDefinition Height="0.06*"/>
+            <RowDefinition Height="0.07*"/>
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0">
             <Menu DockPanel.Dock="Top">
@@ -26,9 +26,9 @@
                     <MenuItem Header="_Open..." Click="HandleOpenProjectClicked"/>
                     <MenuItem Header="_Save" Click="HandleSaveProjectClicked" />
                     <MenuItem Header="_Save as..." Click="HandleSaveProjectAsClicked"/>
-                    <MenuItem Header="_Export..." Click="Export_Clicked" />
+                    <MenuItem Header="_Export..." Click="HandleExportClicked" />
                     <Separator />
-                    <MenuItem Header="_Preferences" Click="Preferences_Clicked"/>
+                    <MenuItem Header="_Preferences" Click="HandlePreferencesClicked"/>
                     <Separator />
                     <MenuItem Header="_Exit" Click="Exit_Clicked"/>
                 </MenuItem>
@@ -39,13 +39,13 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <DockPanel  Grid.Row="1">
+        <DockPanel Grid.Row="1">
             <Frame x:Name="_mainFrame" NavigationUIVisibility="Hidden"/>
         </DockPanel>
-        <DockPanel  Grid.Row="2">
+        <DockPanel Grid.Row="2">
             <StatusBar DockPanel.Dock="Bottom">
                 <StatusBarItem>
-                    <TextBlock Name="LastSaved" Text="Saved..." />
+                    <TextBlock Text="{Binding ElementName=_this, Path=StatusBarMessage, UpdateSourceTrigger=LostFocus}"  />
                 </StatusBarItem>
             </StatusBar>
         </DockPanel>

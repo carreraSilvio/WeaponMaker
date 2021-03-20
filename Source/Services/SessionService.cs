@@ -23,6 +23,7 @@ namespace WeaponMaker
 
         public int CurrentWeaponIndex { get; set; } = 0;
 
+
         public SessionService()
         {
             _project = new Project();
