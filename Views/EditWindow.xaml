@@ -20,11 +20,11 @@
             <RowDefinition Height="0.07*"/>
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0">
-            <Menu DockPanel.Dock="Top">
+            <Menu DockPanel.Dock="Top" IsMainMenu="true">
                 <MenuItem Header="_File">
                     <MenuItem Header="_New"  />
                     <MenuItem Header="_Open..." Click="HandleOpenProjectClicked"/>
-                    <MenuItem Header="_Save" Click="HandleSaveProjectClicked" />
+                    <MenuItem Header="_Save" Click="HandleSaveProjectClicked" InputGestureText="Ctrl+S" />
                     <MenuItem Header="_Save as..." Click="HandleSaveProjectAsClicked"/>
                     <MenuItem Header="_Export..." Click="HandleExportClicked" />
                     <Separator />
