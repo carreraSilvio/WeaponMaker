@@ -31,7 +31,7 @@ namespace WeaponMaker
                 var args = new NavigateToCommand.Args()
                 {
                     caller = this,
-                    target = typeof(EditWindow)
+                    target = typeof(MainWindow)
                 };
                 _commandService.Get<NavigateToCommand>().Execute(args);
             }
@@ -44,7 +44,7 @@ namespace WeaponMaker
                 var args = new NavigateToCommand.Args()
                 {
                     caller = this,
-                    target = typeof(EditWindow)
+                    target = typeof(MainWindow)
                 };
                 _commandService.Get<NavigateToCommand>().Execute(args);
             }
@@ -57,7 +57,7 @@ namespace WeaponMaker
                 var args = new NavigateToCommand.Args()
                 {
                     caller = this,
-                    target = typeof(EditWindow)
+                    target = typeof(MainWindow)
                 };
                 _commandService.Get<NavigateToCommand>().Execute(args);
             }

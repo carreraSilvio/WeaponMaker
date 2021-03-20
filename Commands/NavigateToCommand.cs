@@ -20,7 +20,7 @@ namespace WeaponMaker
         {
             var args = parameter as Args;
             var window = args.caller;
-            var editWindow = new EditWindow();
+            var editWindow = new MainWindow();
             editWindow.Show();
             window.Close();
 

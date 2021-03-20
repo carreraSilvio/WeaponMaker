@@ -23,7 +23,7 @@ namespace WeaponMaker
     /// <summary>
     /// Interaction logic for EditWindow.xaml
     /// </summary>
-    public partial class EditWindow : Window, INotifyPropertyChanged
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         public string StatusBarMessage
         {
@@ -43,7 +43,7 @@ namespace WeaponMaker
         private readonly SessionService _session;
         private readonly CommandService _commandService;
 
-        public EditWindow()
+        public MainWindow()
         {
             _session = ServiceLocator.Fetch<SessionService>();
             InitializeComponent();
@@ -66,7 +66,7 @@ namespace WeaponMaker
                 var args = new NavigateToCommand.Args()
                 {
                     caller = this,
-                    target = typeof(EditWindow)
+                    target = typeof(MainWindow)
                 };
                 _commandService.Get<NavigateToCommand>().Execute(args);
             }
@@ -79,7 +79,7 @@ namespace WeaponMaker
                 var args = new NavigateToCommand.Args()
                 {
                     caller = this,
-                    target = typeof(EditWindow)
+                    target = typeof(MainWindow)
                 };
                 _commandService.Get<NavigateToCommand>().Execute(args);
             }

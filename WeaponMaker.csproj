@@ -121,8 +121,8 @@
     <Compile Include="Source\Services\Command.cs" />
     <Compile Include="Source\Services\CommandService.cs" />
     <Compile Include="Source\Services\PreferencesService.cs" />
-    <Compile Include="Views\EditWindow.xaml.cs">
-      <DependentUpon>EditWindow.xaml</DependentUpon>
+    <Compile Include="Views\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Source\Services\FileSystemService.cs" />
     <Compile Include="Views\Dialogs\PreferencesDialog.xaml.cs">
@@ -139,7 +139,7 @@
     <Compile Include="Views\Pages\WeaponEditPage.xaml.cs">
       <DependentUpon>WeaponEditPage.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\EditWindow.xaml">
+    <Page Include="Views\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
