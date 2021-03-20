@@ -12,13 +12,18 @@
 
     <DockPanel LastChildFill="True">
         <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.75*"/>
+                <RowDefinition Height="0.1*"/>
+            </Grid.RowDefinitions>
             <Label 
             Content="Weapons" 
             HorizontalAlignment="Left" 
-            Margin="5,0,0,0" 
-            VerticalAlignment="Top"/>
+            VerticalAlignment="Top"
+            Grid.Row="0"/>
 
-            <ListBox Name="WeaponListBox" DockPanel.Dock="Left" Width="100" Margin="0,25,0,25" SelectionChanged="WeaponListBox_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
+            <ListBox Name="WeaponListBox" DockPanel.Dock="Left" Width="100" Grid.Row="1" SelectionChanged="WeaponListBox_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
                      PreviewMouseLeftButtonDown="WeaponListBox_PreviewMouseLeftButtonDown"
                      Drop="WeaponListBox_Drop" 
                      AllowDrop="True">
@@ -57,7 +62,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Grid Margin="0,210,0,0">
+            <Grid Grid.Row="2">
                 <Button Name="AddWeaponBtn"  Margin="0,0,50,0" Content="+" Click="AddButton_Clicked"/>
                 <Button Name="RemoveWeaponBtn" Margin="50,0,0,0" Content="-" Click="RemoveButton_Clicked"/>
             </Grid>

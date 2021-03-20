@@ -14,11 +14,12 @@
         MaxHeight="300"
         x:Name="_this">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="161*"/>
-            <ColumnDefinition Width="181*"/>
-        </Grid.ColumnDefinitions>
-        <DockPanel Margin="0,0,0,240" Grid.ColumnSpan="2">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.06*"/>
+            <RowDefinition Height="0.7*"/>
+            <RowDefinition Height="0.06*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
                     <MenuItem Header="_New"  />
@@ -37,10 +38,16 @@
                     <MenuItem Header="_Project" Click="HandleProjectEditViewClicked"/>
                 </MenuItem>
             </Menu>
-
         </DockPanel>
-        <DockPanel Margin="0,23,0,0" Grid.ColumnSpan="2">
+        <DockPanel  Grid.Row="1">
             <Frame x:Name="_mainFrame" NavigationUIVisibility="Hidden"/>
+        </DockPanel>
+        <DockPanel  Grid.Row="2">
+            <StatusBar DockPanel.Dock="Bottom">
+                <StatusBarItem>
+                    <TextBlock Name="LastSaved" Text="Saved..." />
+                </StatusBarItem>
+            </StatusBar>
         </DockPanel>
     </Grid>
 </Window>
