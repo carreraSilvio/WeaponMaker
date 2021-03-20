@@ -12,31 +12,31 @@ namespace WeaponMaker
     /// </summary>
     public partial class MainWindow : Window
     {
-        private MessageCommand _messageCommand = new MessageCommand();
-        public MessageCommand MessageCommand => _messageCommand;
+        private readonly CommandService _commandService;
+        private readonly PreferencesService _preferencesService;
 
         public MainWindow()
         {
             InitializeComponent();
-            PreferencesService preferencesService = ServiceLocator.Fetch<PreferencesService>();
-            if (!preferencesService.Preferences.LoadLastProjectOnStartUp)
+            _preferencesService = ServiceLocator.Fetch<PreferencesService>();
+            if (!_preferencesService.Preferences.LoadLastProjectOnStartUp)
             {
                 return;
             }
 
-            CommandService commandService = ServiceLocator.Fetch<CommandService>();
-            if (commandService.Get<LoadProjectCommand>().Execute(preferencesService.Preferences.LastProjectPath))
+            _commandService = ServiceLocator.Fetch<CommandService>();
+            if (_commandService.Get<LoadProjectCommand>().Execute(_preferencesService.Preferences.LastProjectPath))
             {
                 var args = new NavigateToCommand.Args()
                 {
                     caller = this,
                     target = typeof(EditWindow)
                 };
-                commandService.Get<NavigateToCommand>().Execute(args);
+                _commandService.Get<NavigateToCommand>().Execute(args);
             }
         }
 
-        private void NewProject_Clicked(object sender, RoutedEventArgs e)
+        private void HandleNewProjectClicked(object sender, RoutedEventArgs e)
         {
             CommandService commandService = ServiceLocator.Fetch<CommandService>();
             if (commandService.Get<NewProjectCommand>().Execute())
@@ -50,7 +50,7 @@ namespace WeaponMaker
             }
         }
 
-        private void OpenProject_Clicked(object sender, RoutedEventArgs e)
+        private void HandleOpenProjectClicked(object sender, RoutedEventArgs e)
         {
             CommandService commandService = ServiceLocator.Fetch<CommandService>();
             if (commandService.Get<OpenProjectCommand>().Execute())
@@ -64,15 +64,15 @@ namespace WeaponMaker
             }
         }
 
-        private void Preferences_Clicked(object sender, RoutedEventArgs e)
+        private void HandlePreferencesClicked(object sender, RoutedEventArgs e)
         {
             PreferencesDialog preferences = new PreferencesDialog();
             preferences.ShowDialog();
         }
 
-        private void Exit_Clicked(object sender, RoutedEventArgs e)
+        private void HandleExitClicked(object sender, RoutedEventArgs e)
         {
-            var commandService = ServiceLocator.Fetch<CommandService>();
+            
             commandService.Get<ShutdownCommand>().Execute();
         }
     }

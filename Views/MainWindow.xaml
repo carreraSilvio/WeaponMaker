@@ -18,12 +18,12 @@
         <DockPanel>
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
-                    <MenuItem Header="_New"  Click="NewProject_Clicked" />
-                    <MenuItem Header="_Open" Click="OpenProject_Clicked"/>
+                    <MenuItem Header="_New"  Click="HandleNewProjectClicked" />
+                    <MenuItem Header="_Open" Click="HandleOpenProjectClicked"/>
                     <Separator />
-                    <MenuItem Header="_Preferences" Click="Preferences_Clicked"/>
+                    <MenuItem Header="_Preferences" Click="HandlePreferencesClicked"/>
                     <Separator />
-                    <MenuItem Header="_Exit" Click="Exit_Clicked"/>
+                    <MenuItem Header="_Exit" Click="HandleExitClicked"/>
                 </MenuItem>
             </Menu>
             <TextBox AcceptsReturn="True" />
