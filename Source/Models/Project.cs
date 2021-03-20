@@ -55,7 +55,8 @@ namespace WeaponMaker
             PropertyInfo[] properties = typeof(Project).GetProperties();
             foreach (PropertyInfo property in properties)
             {
-                property.SetValue(this, property.GetValue(otherProject));
+                var value = property.GetValue(otherProject) ?? default;
+                property.SetValue(this, value);
             }
         }
 

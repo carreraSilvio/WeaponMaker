@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace WeaponMaker
         }
 
         public int CurrentWeaponIndex { get; set; } = 0;
+        public bool IsProjectModified { get; set; }
 
 
         public SessionService()
@@ -32,6 +34,13 @@ namespace WeaponMaker
         public void Clear()
         {
             CurrentWeaponIndex = 0;
+        }
+
+        internal void HandleProjectChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName != "Name" && e.PropertyName != "Path") return;
+
+            IsProjectModified = true;
         }
 
     }

@@ -16,8 +16,10 @@ namespace WeaponMaker
 
         public override bool Execute(object parameter = null)
         {
-            var project = ServiceLocator.Fetch<SessionService>().Project;
-            project.LastTimeSaved = DateTime.UtcNow.ToString("yyyy-MM-dd_hh:mm:ss");
+            var sessionService = ServiceLocator.Fetch<SessionService>();
+            var project = sessionService.Project;
+            sessionService.IsProjectModified = false;
+            project.LastTimeSaved = DateTime.UtcNow.ToString("yy-MM-dd_hh:mm:ss");
             return FileSystemService.SaveProject(project);
         }
     }

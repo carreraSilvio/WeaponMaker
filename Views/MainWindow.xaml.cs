@@ -18,13 +18,14 @@ namespace WeaponMaker
         public MainWindow()
         {
             InitializeComponent();
+            _commandService = ServiceLocator.Fetch<CommandService>();
             _preferencesService = ServiceLocator.Fetch<PreferencesService>();
             if (!_preferencesService.Preferences.LoadLastProjectOnStartUp)
             {
                 return;
             }
 
-            _commandService = ServiceLocator.Fetch<CommandService>();
+
             if (_commandService.Get<LoadProjectCommand>().Execute(_preferencesService.Preferences.LastProjectPath))
             {
                 var args = new NavigateToCommand.Args()
@@ -38,42 +39,39 @@ namespace WeaponMaker
 
         private void HandleNewProjectClicked(object sender, RoutedEventArgs e)
         {
-            CommandService commandService = ServiceLocator.Fetch<CommandService>();
-            if (commandService.Get<NewProjectCommand>().Execute())
+            if (_commandService.Get<NewProjectCommand>().Execute())
             {
                 var args = new NavigateToCommand.Args()
                 {
                     caller = this,
                     target = typeof(EditWindow)
                 };
-                commandService.Get<NavigateToCommand>().Execute(args);
+                _commandService.Get<NavigateToCommand>().Execute(args);
             }
         }
 
         private void HandleOpenProjectClicked(object sender, RoutedEventArgs e)
         {
-            CommandService commandService = ServiceLocator.Fetch<CommandService>();
-            if (commandService.Get<OpenProjectCommand>().Execute())
+            if (_commandService.Get<OpenProjectCommand>().Execute())
             {
                 var args = new NavigateToCommand.Args()
                 {
                     caller = this,
                     target = typeof(EditWindow)
                 };
-                commandService.Get<NavigateToCommand>().Execute(args);
+                _commandService.Get<NavigateToCommand>().Execute(args);
             }
         }
 
         private void HandlePreferencesClicked(object sender, RoutedEventArgs e)
         {
-            PreferencesDialog preferences = new PreferencesDialog();
-            preferences.ShowDialog();
+            PreferencesDialog prefsDialog = new PreferencesDialog();
+            prefsDialog.ShowDialog();
         }
 
         private void HandleExitClicked(object sender, RoutedEventArgs e)
         {
-            
-            commandService.Get<ShutdownCommand>().Execute();
+            _commandService.Get<ShutdownCommand>().Execute();
         }
     }
 }

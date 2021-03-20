@@ -10,7 +10,6 @@ namespace WeaponMaker
 {
     public class SaveProjectAsCommand : Command
     {
-
         public SaveProjectAsCommand()
         {
         }

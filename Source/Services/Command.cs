@@ -21,6 +21,4 @@ namespace WeaponMaker
     {
         public abstract bool Execute(object parameter = null);
     }
-
-
 }
