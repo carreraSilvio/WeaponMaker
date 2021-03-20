@@ -43,9 +43,9 @@
             <Frame x:Name="_mainFrame" NavigationUIVisibility="Hidden"/>
         </DockPanel>
         <DockPanel Grid.Row="2">
-            <StatusBar DockPanel.Dock="Bottom">
+            <StatusBar Name="BotStatusBar" DockPanel.Dock="Bottom">
                 <StatusBarItem>
-                    <TextBlock Text="{Binding ElementName=_this, Path=StatusBarMessage, UpdateSourceTrigger=LostFocus}"  />
+                    <TextBlock Name="StatusBarTextBlock" Text="{Binding ElementName=_this, Path=StatusBarMessage, UpdateSourceTrigger=LostFocus}"  />
                 </StatusBarItem>
             </StatusBar>
         </DockPanel>

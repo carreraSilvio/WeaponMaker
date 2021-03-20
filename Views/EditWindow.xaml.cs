@@ -13,6 +13,7 @@ using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -29,6 +30,7 @@ namespace WeaponMaker
             set
             {
                 _statusBarMessage = value;
+                HideStatusBarMessage();
                 RaisePropertyChanged(nameof(StatusBarMessage));
             }
         }
@@ -135,6 +137,33 @@ namespace WeaponMaker
 
         #endregion
 
+        private void HideStatusBarMessage()
+        {
+            DoubleAnimation animation = new DoubleAnimation
+            {
+                To = 0,
+                From = 1,
+                Duration = TimeSpan.FromSeconds(30),
+                EasingFunction = new QuadraticEase()
+            };
+
+            Storyboard sb = new Storyboard();
+            sb.Children.Add(animation);
+
+            StatusBarTextBlock.Opacity = 1;
+            StatusBarTextBlock.Visibility = Visibility.Visible;
+
+            Storyboard.SetTarget(sb, StatusBarTextBlock);
+            Storyboard.SetTargetProperty(sb, new PropertyPath(System.Windows.Controls.Control.OpacityProperty));
+
+            sb.Completed += HandleStatusBarMessageFadeComplete;
+            sb.Begin();
+        }
+
+        private void HandleStatusBarMessageFadeComplete(object sender, EventArgs e)
+        {
+            StatusBarTextBlock.Visibility = Visibility.Collapsed;
+        }
     }
 
 }
