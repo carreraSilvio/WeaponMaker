@@ -71,52 +71,55 @@
             <Grid.CommandBindings>
                 <CommandBinding  Command="ApplicationCommands.Undo"/>
             </Grid.CommandBindings>
-            
             <Grid.RowDefinitions>
                 <RowDefinition Height="24"/>
+                <RowDefinition Height="20"/>
                 <RowDefinition Height="24"/>
+                <RowDefinition Height="20"/>
                 <RowDefinition Height="24"/>
-                <RowDefinition Height="24"/>
-                <RowDefinition Height="24"/>
+                <RowDefinition Height="20"/>
                 <RowDefinition Height="24"/>
             </Grid.RowDefinitions>
+            
+
+            <Grid.Resources>
+                <Style TargetType="Label" >
+                    <Setter Property="HorizontalAlignment" Value="Left" />
+                    <Setter Property="VerticalAlignment" Value="Bottom" />
+                </Style>
+                <Style TargetType="TextBox" >
+                    <Setter Property="HorizontalAlignment" Value="Left" />
+                    <Setter Property="VerticalAlignment" Value="Top" />
+                    <Setter Property="TextWrapping" Value="Wrap" />
+                    <Setter Property="Width" Value="120" />
+                </Style>
+            </Grid.Resources>
+            
             <Label 
-            Content="Name" 
-            HorizontalAlignment="Left" 
+            Content="Stats" 
             Grid.Row="0"
-            VerticalAlignment="Top"/>
-            <TextBox 
-            HorizontalAlignment="Left" 
-            Grid.Row="1"
-            TextWrapping="Wrap"
-            Text="{Binding ElementName=_this, Path=CurrentWeapon.Name, UpdateSourceTrigger=LostFocus}" 
-            VerticalAlignment="Top" 
-            Width="120" />
-
-            <Label Content="Rate of Fire" 
-                   HorizontalAlignment="Left" 
-                   Grid.Row="2" 
-                   VerticalAlignment="Top"/>
-            <TextBox 
-            HorizontalAlignment="Left" 
-            Grid.Row="3"
-            TextWrapping="Wrap"
-            Text="{Binding ElementName=_this, Path=CurrentWeapon.RateOfFire, UpdateSourceTrigger=LostFocus}" 
-            VerticalAlignment="Top" 
-            Width="120" />
-
-            <Label Content="Damage" 
-                   HorizontalAlignment="Left" 
-                   Grid.Row="4" 
-                   VerticalAlignment="Top"
+            Padding="0"/>
+            
+            <Label Content="Name" 
+                   Grid.Row="1" 
                    Padding="0"/>
             <TextBox 
-            HorizontalAlignment="Left" 
-            Grid.Row="5" 
-            TextWrapping="Wrap"
+            Text="{Binding ElementName=_this, Path=CurrentWeapon.Name, UpdateSourceTrigger=LostFocus}" 
+            Grid.Row="2"/>
+
+            <Label Content="Rate of Fire" 
+                   Grid.Row="3"
+                   Padding="0"/>
+            <TextBox Grid.Row="4"
+            Text="{Binding ElementName=_this, Path=CurrentWeapon.RateOfFire, UpdateSourceTrigger=LostFocus}" 
+             />
+
+            <Label Content="Damage" 
+                   Grid.Row="5"
+                   Padding="0"/>
+            <TextBox Grid.Row="6" 
             Text="{Binding ElementName=_this, Path=CurrentWeapon.Damage, UpdateSourceTrigger=LostFocus}"
-            VerticalAlignment="Top" 
-            Width="120" />
+             />
 
         </Grid>
     </DockPanel>
