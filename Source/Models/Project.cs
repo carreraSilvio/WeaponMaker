@@ -51,13 +51,12 @@ namespace WeaponMaker
         }
         private ObservableCollection<Weapon> _weapons;
 
-        public ObservableCollection<string> WeaponTypes
+        public ObservableCollection<WeaponType> WeaponTypes
         {
             get => _weaponTypes;
             set => _weaponTypes = value;
         }
-
-        private ObservableCollection<string> _weaponTypes;
+        private ObservableCollection<WeaponType> _weaponTypes;
 
         public Project()
         {

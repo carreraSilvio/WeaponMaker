@@ -18,14 +18,12 @@
                 <RowDefinition Height="0.12*"/>
             </Grid.RowDefinitions>
             <Label 
-            Content="Weapons" 
+            Content="Weapon Types" 
             HorizontalAlignment="Left" 
             VerticalAlignment="Top"
             Grid.Row="0"/>
 
-            <ListBox Name="WeaponListBox" DockPanel.Dock="Left" Width="100" Grid.Row="1" SelectionChanged="WeaponListBox_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
-                     PreviewMouseLeftButtonDown="WeaponListBox_PreviewMouseLeftButtonDown"
-                     Drop="WeaponListBox_Drop" 
+            <ListBox Name="WeaponTypeListBox" DockPanel.Dock="Left" Width="100" Grid.Row="1" SelectionChanged="WeaponListBox_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
                      AllowDrop="True">
                 <ListBox.ContextMenu>
                     <ContextMenu>
@@ -104,22 +102,9 @@
                    Grid.Row="1" 
                    Padding="0"/>
             <TextBox 
-            Text="{Binding ElementName=_this, Path=CurrentWeapon.Name, UpdateSourceTrigger=LostFocus}" 
+            Text="{Binding ElementName=_this, Path=CurrentWeaponType.Name, UpdateSourceTrigger=LostFocus}" 
             Grid.Row="2"/>
 
-            <Label Content="Rate of Fire" 
-                   Grid.Row="3"
-                   Padding="0"/>
-            <TextBox Grid.Row="4"
-            Text="{Binding ElementName=_this, Path=CurrentWeapon.RateOfFire, UpdateSourceTrigger=LostFocus}" 
-             />
-
-            <Label Content="Damage" 
-                   Grid.Row="5"
-                   Padding="0"/>
-            <TextBox Grid.Row="6" 
-            Text="{Binding ElementName=_this, Path=CurrentWeapon.Damage, UpdateSourceTrigger=LostFocus}"
-             />
 
         </Grid>
     </DockPanel>

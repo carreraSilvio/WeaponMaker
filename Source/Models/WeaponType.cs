@@ -7,7 +7,7 @@ namespace WeaponMaker
     [Serializable]
     public class WeaponType : INotifyPropertyChanged
     {
-        private string _name = "Sword";
+        private string _name = "Handgun";
         public string Name
         {
             get => _name;
@@ -53,7 +53,7 @@ namespace WeaponMaker
 
         public void Clear()
         {
-            Name = "Sword";
+            Name = "Handgun";
         }
     }
 }

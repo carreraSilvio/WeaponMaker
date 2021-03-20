@@ -8,7 +8,6 @@ namespace WeaponMaker
     public class Weapon : INotifyPropertyChanged
     {
         private string _name = "Weapon";
-
         public string Name
         {
             get => _name;
@@ -20,7 +19,6 @@ namespace WeaponMaker
         }
 
         private float _rateOfFire;
-
         public string RateOfFire
         {
             get
@@ -36,7 +34,6 @@ namespace WeaponMaker
         }
 
         private int _damage;
-
         public string Damage
         {
             get
@@ -50,6 +47,28 @@ namespace WeaponMaker
                 RaisePropertyChanged(nameof(Damage));
             }
         }
+        private string _weaponTypeId;
+        public string WeaponTypeId
+        {
+            get
+            {
+                return _weaponTypeId.ToString();
+            }
+            set
+            {
+                _weaponTypeId = value;
+                RaisePropertyChanged(nameof(Damage));
+            }
+        }
+
+        #region INotifyPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
 
         public void Copy(Weapon otherWeapon)
         {
@@ -58,13 +77,6 @@ namespace WeaponMaker
             {
                 property.SetValue(this, property.GetValue(otherWeapon));
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void RaisePropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public void Clear()

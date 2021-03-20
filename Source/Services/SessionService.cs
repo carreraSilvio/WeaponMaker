@@ -21,8 +21,16 @@ namespace WeaponMaker
             get => _project.Weapons[CurrentWeaponIndex];
             set => _project.Weapons[CurrentWeaponIndex].Copy(value);
         }
-
         public int CurrentWeaponIndex { get; set; } = 0;
+
+        public WeaponType CurrentWeaponType
+        {
+            get => _project.WeaponTypes[CurrentWeaponTypeIndex];
+            set => _project.WeaponTypes[CurrentWeaponTypeIndex].Copy(value);
+        }
+        public int CurrentWeaponTypeIndex { get; set; } = 0;
+
+
         public bool IsProjectModified { get; set; }
 
 
