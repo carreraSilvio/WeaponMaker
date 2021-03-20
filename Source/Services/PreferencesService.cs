@@ -49,7 +49,7 @@ namespace WeaponMaker
             Preferences = rawPrefs ?? new Preferences();
         }
 
-        internal void Project_Changed(object sender, PropertyChangedEventArgs e)
+        internal void HandleProjectChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName != "Name" && e.PropertyName != "Path") return;
 

@@ -21,30 +21,6 @@ namespace WeaponMaker
             }
         }
 
-        private bool _autoSave;
-
-        public bool AutoSave
-        {
-            get => _autoSave;
-            set
-            {
-                _autoSave = value;
-                RaisePropertyChanged(nameof(AutoSave));
-            }
-        }
-
-        private float _autoSaveFrequency;
-
-        public float AutoSaveFrequency
-        {
-            get => _autoSaveFrequency;
-            set
-            {
-                _autoSaveFrequency = value;
-                RaisePropertyChanged(nameof(AutoSaveFrequency));
-            }
-        }
-
         public string LastProjectName { get; set; }
         public string LastProjectPath { get; set; }
 

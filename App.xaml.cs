@@ -37,7 +37,7 @@ namespace WeaponMaker
             var prefService = new PreferencesService();
             ServiceLocator.Add(prefService);
 
-            session.Project.PropertyChanged += prefService.Project_Changed;
+            session.Project.PropertyChanged += prefService.HandleProjectChanged;
         }
     }
 }
