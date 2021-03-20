@@ -39,6 +39,7 @@ namespace WeaponMaker
 
         private readonly WeaponEditPage _weaponEditPage;
         private readonly ProjectEditPage _projectEditPage;
+        private readonly WeaponTypeEditPage _weaponTypeEditPage;
 
         private readonly SessionService _session;
         private readonly CommandService _commandService;
@@ -50,6 +51,7 @@ namespace WeaponMaker
 
             _weaponEditPage = new WeaponEditPage();
             _projectEditPage = new ProjectEditPage();
+            _weaponTypeEditPage = new WeaponTypeEditPage();
             _mainFrame.Navigate(_weaponEditPage);
 
             _commandService = ServiceLocator.Fetch<CommandService>();
@@ -114,10 +116,17 @@ namespace WeaponMaker
             _mainFrame.Navigate(_weaponEditPage);
         }
 
+        private void HandleWeaponTypesEditViewClicked(object sender, RoutedEventArgs e)
+        {
+            _mainFrame.Navigate(_weaponTypeEditPage);
+        }
+
         private void HandleProjectEditViewClicked(object sender, RoutedEventArgs e)
         {
             _mainFrame.Navigate(_projectEditPage);
         }
+
+
         #endregion
 
         #region Exit

@@ -118,6 +118,7 @@
     <Compile Include="Commands\ShutdownCommand.cs" />
     <Compile Include="Commands\NewProjectCommand.cs" />
     <Compile Include="Source\Models\Preferences.cs" />
+    <Compile Include="Source\Models\WeaponType.cs" />
     <Compile Include="Source\Services\Command.cs" />
     <Compile Include="Source\Services\CommandService.cs" />
     <Compile Include="Source\Services\PreferencesService.cs" />
@@ -127,6 +128,9 @@
     <Compile Include="Source\Services\FileSystemService.cs" />
     <Compile Include="Views\Dialogs\PreferencesDialog.xaml.cs">
       <DependentUpon>PreferencesDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\WeaponTypeEditPage.xaml.cs">
+      <DependentUpon>WeaponTypeEditPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\ProjectEditPage.xaml.cs">
       <DependentUpon>ProjectEditPage.xaml</DependentUpon>
@@ -158,6 +162,10 @@
     <Page Include="Views\Dialogs\PreferencesDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\WeaponTypeEditPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Pages\ProjectEditPage.xaml">
       <SubType>Designer</SubType>

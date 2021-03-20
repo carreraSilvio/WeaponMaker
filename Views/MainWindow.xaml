@@ -35,6 +35,7 @@
 
                 <MenuItem Header="_View">
                     <MenuItem Header="_Weapons" Click="HandleWeaponsEditViewClicked" />
+                    <MenuItem Header="_Weapon Types" Click="HandleWeaponTypesEditViewClicked"/>
                     <MenuItem Header="_Project" Click="HandleProjectEditViewClicked"/>
                 </MenuItem>
             </Menu>

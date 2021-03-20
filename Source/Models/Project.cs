@@ -12,8 +12,6 @@ namespace WeaponMaker
     public class Project : INotifyPropertyChanged
     {
         private string _name;
-        private ObservableCollection<Weapon> _weapons;
-        private List<string> _weaponTypes;
         public string Name
         {
             get => _name;
@@ -23,7 +21,7 @@ namespace WeaponMaker
                 RaisePropertyChanged(nameof(Name));
             }
         }
-        public ObservableCollection<Weapon> Weapons { get => _weapons; set => _weapons = value; }
+        
         private string _path;
         public string Path
         {
@@ -45,6 +43,21 @@ namespace WeaponMaker
                 RaisePropertyChanged(nameof(LastTimeSaved));
             }
         }
+
+        public ObservableCollection<Weapon> Weapons 
+        { 
+            get => _weapons; 
+            set => _weapons = value; 
+        }
+        private ObservableCollection<Weapon> _weapons;
+
+        public ObservableCollection<string> WeaponTypes
+        {
+            get => _weaponTypes;
+            set => _weaponTypes = value;
+        }
+
+        private ObservableCollection<string> _weaponTypes;
 
         public Project()
         {
