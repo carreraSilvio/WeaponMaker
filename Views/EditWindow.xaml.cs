@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace WeaponMaker
 {
@@ -30,7 +31,6 @@ namespace WeaponMaker
             set
             {
                 _statusBarMessage = value;
-                HideStatusBarMessage();
                 RaisePropertyChanged(nameof(StatusBarMessage));
             }
         }
@@ -54,6 +54,8 @@ namespace WeaponMaker
 
             _commandService = ServiceLocator.Fetch<CommandService>();
             StatusBarMessage = $"Loaded {_session.Project.Name} project";
+            FadeOutStatusBarMessage(10);
+            SetUpHotkeys();
         }
 
         #region New/Open/Save
@@ -85,11 +87,7 @@ namespace WeaponMaker
 
         private void HandleSaveProjectClicked(object sender, RoutedEventArgs e)
         {
-            var success = _commandService.Get<SaveProjectCommand>().Execute();
-            if (success)
-            {
-                StatusBarMessage = $"Saved {_session.Project.LastTimeSaved}";
-            }
+            ExecuteSaveProject();
         }
 
         private void HandleSaveProjectAsClicked(object sender, RoutedEventArgs e)
@@ -102,13 +100,15 @@ namespace WeaponMaker
         }
         #endregion
 
+        #region Dialogs
         private void HandlePreferencesClicked(object sender, RoutedEventArgs e)
         {
             PreferencesDialog preferences = new PreferencesDialog();
             preferences.ShowDialog();
-        }
+        } 
+        #endregion
 
-        #region View Clicked
+        #region Views
         private void HandleWeaponsEditViewClicked(object sender, RoutedEventArgs e)
         {
             _mainFrame.Navigate(_weaponEditPage);
@@ -120,11 +120,13 @@ namespace WeaponMaker
         }
         #endregion
 
+        #region Exit
         private void Exit_Clicked(object sender, RoutedEventArgs e)
         {
             var commandService = ServiceLocator.Fetch<CommandService>();
             commandService.Get<ShutdownCommand>().Execute();
-        }
+        } 
+        #endregion
 
         #region INotifyPropertyChanged
 
@@ -137,13 +139,44 @@ namespace WeaponMaker
 
         #endregion
 
-        private void HideStatusBarMessage()
+        private void SetUpHotkeys()
+        {
+            try
+            {
+                RoutedCommand firstSettings = new RoutedCommand();
+                firstSettings.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Control));
+                CommandBindings.Add(new CommandBinding(firstSettings, HandleCtrlSHotkey));
+            }
+            catch (Exception err)
+            {
+                //handle exception error
+            }
+        }
+        private void HandleCtrlSHotkey(object sender, ExecutedRoutedEventArgs e)
+        {
+            ExecuteSaveProject();
+        }
+
+        private void ExecuteSaveProject()
+        {
+            var success = _commandService.Get<SaveProjectCommand>().Execute();
+            if (success)
+            {
+                StatusBarMessage = $"Saved {_session.Project.LastTimeSaved}";
+                HideStatusBarMessage(10);
+            }
+        }
+
+        /// <summary>
+        /// Will fade out the status bar over X seconds
+        /// </summary>
+        private void FadeOutStatusBarMessage(double fadeDuration = 3)
         {
             DoubleAnimation animation = new DoubleAnimation
             {
-                To = 0,
                 From = 1,
-                Duration = TimeSpan.FromSeconds(30),
+                To = 0,
+                Duration = TimeSpan.FromSeconds(fadeDuration),
                 EasingFunction = new QuadraticEase()
             };
 
@@ -156,13 +189,40 @@ namespace WeaponMaker
             Storyboard.SetTarget(sb, StatusBarTextBlock);
             Storyboard.SetTargetProperty(sb, new PropertyPath(System.Windows.Controls.Control.OpacityProperty));
 
-            sb.Completed += HandleStatusBarMessageFadeComplete;
+            sb.Completed += (object sender, EventArgs e) => 
+            {
+                StatusBarTextBlock.Visibility = Visibility.Collapsed;
+            } ;
             sb.Begin();
         }
 
-        private void HandleStatusBarMessageFadeComplete(object sender, EventArgs e)
+        /// <summary>
+        /// Will hide the status bar after x seconds
+        /// </summary>
+        private void HideStatusBarMessage(double delay = 3)
         {
-            StatusBarTextBlock.Visibility = Visibility.Collapsed;
+            var animation = new DoubleAnimation
+            {
+                To = 1,
+                From = 1,
+                Duration = TimeSpan.FromSeconds(delay),
+                EasingFunction = new QuadraticEase()
+            };
+
+            Storyboard sb = new Storyboard();
+            sb.Children.Add(animation);
+
+            StatusBarTextBlock.Opacity = 1;
+            StatusBarTextBlock.Visibility = Visibility.Visible;
+
+            Storyboard.SetTarget(sb, StatusBarTextBlock);
+            Storyboard.SetTargetProperty(sb, new PropertyPath(System.Windows.Controls.Control.OpacityProperty));
+
+            sb.Completed += (object sender, EventArgs e) =>
+            {
+                StatusBarTextBlock.Visibility = Visibility.Collapsed;
+            };
+            sb.Begin();
         }
     }
 
