@@ -129,7 +129,7 @@
     <Compile Include="Views\Dialogs\PreferencesDialog.xaml.cs">
       <DependentUpon>PreferencesDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProjectEditPage.xaml.cs">
+    <Compile Include="Views\Pages\ProjectEditPage.xaml.cs">
       <DependentUpon>ProjectEditPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Source\Services\SessionService.cs" />
@@ -137,7 +137,7 @@
     <Compile Include="Source\Services\ServiceLocator.cs" />
     <Compile Include="Source\Models\Weapon.cs" />
     <Compile Include="Source\Models\Project.cs" />
-    <Compile Include="Views\WeaponEditPage.xaml.cs">
+    <Compile Include="Views\Pages\WeaponEditPage.xaml.cs">
       <DependentUpon>WeaponEditPage.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\EditWindow.xaml">
@@ -160,11 +160,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ProjectEditPage.xaml">
+    <Page Include="Views\Pages\ProjectEditPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\WeaponEditPage.xaml">
+    <Page Include="Views\Pages\WeaponEditPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
