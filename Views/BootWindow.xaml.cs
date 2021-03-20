@@ -10,12 +10,12 @@ namespace WeaponMaker
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class BootWindow : Window
     {
         private readonly CommandService _commandService;
         private readonly PreferencesService _preferencesService;
 
-        public MainWindow()
+        public BootWindow()
         {
             InitializeComponent();
             _commandService = ServiceLocator.Fetch<CommandService>();
