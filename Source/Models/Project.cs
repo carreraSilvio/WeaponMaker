@@ -49,7 +49,7 @@ namespace WeaponMaker
             get => _weapons; 
             set => _weapons = value; 
         }
-        private ObservableCollection<Weapon> _weapons;
+        private ObservableCollection<Weapon> _weapons = new ObservableCollection<Weapon>();
 
         public ObservableCollection<WeaponType> WeaponTypes
         {

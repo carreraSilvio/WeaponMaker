@@ -77,6 +77,7 @@ namespace WeaponMaker
         private void AddButton_Clicked(object sender, RoutedEventArgs e)
         {
             _session.Project.Weapons.Add(new Weapon() { Name = "New Weapon" });
+            
             UpdateRemoveButtons();
         }
 

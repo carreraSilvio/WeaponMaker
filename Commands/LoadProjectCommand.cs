@@ -23,6 +23,8 @@ namespace WeaponMaker
                 var session = ServiceLocator.Fetch<SessionService>();
                 session.Clear();
                 session.Project = result.project;
+                session.WireEventHandlers();
+                
 
                 return true;
             }

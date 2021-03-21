@@ -25,7 +25,7 @@ namespace WeaponMaker
             if (_sessionService.IsProjectModified)
             {
                 var messageBoxResult = MessageBox.Show(
-                    "Do you want to save the changes you made? \nChanges will be lost if you don't save them.",
+                    "Do you want to save the changes you made?",
                     "Project has been modified", 
                     System.Windows.MessageBoxButton.YesNoCancel);
                 if (messageBoxResult == MessageBoxResult.Yes)

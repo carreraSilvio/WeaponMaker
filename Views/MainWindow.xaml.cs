@@ -166,6 +166,11 @@ namespace WeaponMaker
             ExecuteSaveProject();
         }
 
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            _commandService.Get<ShutdownCommand>().Execute();
+        }
+
         private void ExecuteSaveProject()
         {
             var success = _commandService.Get<SaveProjectCommand>().Execute();

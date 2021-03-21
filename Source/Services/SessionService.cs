@@ -44,10 +44,24 @@ namespace WeaponMaker
             CurrentWeaponIndex = 0;
         }
 
-        internal void Project_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        public void WireEventHandlers()
+        {
+            Project.PropertyChanged -= Project_PropertyChanged;
+            Project.PropertyChanged += Project_PropertyChanged;
+
+            Project.Weapons.CollectionChanged -= Weapons_CollectionChanged;
+            Project.Weapons.CollectionChanged += Weapons_CollectionChanged;
+        }
+
+        private void Project_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName != "Name" && e.PropertyName != "Path") return;
 
+            IsProjectModified = true;
+        }
+
+        private void Weapons_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
             IsProjectModified = true;
         }
 
