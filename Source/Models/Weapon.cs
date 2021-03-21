@@ -47,7 +47,7 @@ namespace WeaponMaker
                 RaisePropertyChanged(nameof(Damage));
             }
         }
-        private string _weaponTypeId;
+        private string _weaponTypeId = "";
         public string WeaponTypeId
         {
             get

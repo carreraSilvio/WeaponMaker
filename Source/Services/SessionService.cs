@@ -44,7 +44,7 @@ namespace WeaponMaker
             CurrentWeaponIndex = 0;
         }
 
-        internal void HandleProjectChanged(object sender, PropertyChangedEventArgs e)
+        internal void Project_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName != "Name" && e.PropertyName != "Path") return;
 

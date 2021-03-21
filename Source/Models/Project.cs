@@ -58,6 +58,14 @@ namespace WeaponMaker
         }
         private ObservableCollection<WeaponType> _weaponTypes;
 
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public Project()
         {
         }
@@ -72,11 +80,16 @@ namespace WeaponMaker
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void RaisePropertyChanged(string propertyName)
+        public WeaponType FetchWeaponType(string weaponTypeId)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            foreach (var weaponType in _weaponTypes)
+            {
+                if (weaponType.Id.Equals(weaponTypeId))
+                {
+                    return weaponType;
+                }
+            }
+            return default;
         }
     }
 }

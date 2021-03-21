@@ -44,6 +44,12 @@ namespace WeaponMaker
         {
             _session = ServiceLocator.Fetch<SessionService>();
             InitializeComponent();
+
+            //SetUp weaponType combobox
+            WeaponTypesComboBox.ItemsSource = _session.Project.WeaponTypes;
+            WeaponTypesComboBox.SelectedItem = WeaponTypesComboBox.Items.GetItemAt(0);
+
+            //SetUp weapons listbox
             WeaponListBox.ItemsSource = _session.Project.Weapons;
             WeaponListBox.SelectedItem = WeaponListBox.Items.GetItemAt(0);
         }
@@ -58,8 +64,12 @@ namespace WeaponMaker
             else
             {
                 _session.CurrentWeaponIndex = WeaponListBox.Items.IndexOf(e.AddedItems[0]);
+
+                UpdateWeaponTypeComboBoxSelection();
             }
             RaisePropertyChanged(nameof(CurrentWeapon));
+
+
         }
 
         #region Bottom Buttons Handlers
@@ -128,10 +138,12 @@ namespace WeaponMaker
 
                 //Set value
                 _session.CurrentWeapon.Copy(copiedWeapon);
+                
 
                 //Update UI
                 Clipboard.Clear();
                 UpdateHasDataInClipboard();
+                UpdateWeaponTypeComboBoxSelection();
             }
             catch (Exception ex)
             {
@@ -231,6 +243,16 @@ namespace WeaponMaker
 
         #endregion
 
+
+        private void WeaponTypesComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count != 0)
+            {
+                var selectedWeaponType = WeaponTypesComboBox.SelectedItem as WeaponType;
+                CurrentWeapon.WeaponTypeId = selectedWeaponType.Id;
+            }
+        }
+
         private void UpdateRemoveButtons()
         {
             var hasOneItem = _session.Project.Weapons.Count == 1;
@@ -244,5 +266,19 @@ namespace WeaponMaker
             //the UI directly but it's what we have for now.
             CtxMenu_Paste.IsEnabled = Clipboard.ContainsData(typeof(Weapon).FullName);
         }
+
+        private void UpdateWeaponTypeComboBoxSelection()
+        {
+            var currentWeaponTypeId = _session.CurrentWeapon.WeaponTypeId;
+            if (currentWeaponTypeId != "")
+            {
+                WeaponTypesComboBox.SelectedItem = _session.Project.FetchWeaponType(currentWeaponTypeId);
+            }
+            else
+            {
+                WeaponTypesComboBox.SelectedItem = WeaponTypesComboBox.Items[0];
+            }
+        }
+
     }
 }

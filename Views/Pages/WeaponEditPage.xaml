@@ -79,6 +79,8 @@
                 <RowDefinition Height="24"/>
                 <RowDefinition Height="20"/>
                 <RowDefinition Height="24"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="24"/>
             </Grid.RowDefinitions>
             
 
@@ -120,6 +122,24 @@
             <TextBox Grid.Row="6" 
             Text="{Binding ElementName=_this, Path=CurrentWeapon.Damage, UpdateSourceTrigger=LostFocus}"
              />
+            
+            <Label Content="WeaponType" 
+                   Grid.Row="7"
+                   Padding="0"/>
+            <ComboBox Name="WeaponTypesComboBox" 
+                      SelectionChanged="WeaponTypesComboBox_SelectionChanged"
+                      Grid.Row="8"
+                      Width="120"
+                      VerticalAlignment="Center"
+                      HorizontalAlignment="Left">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock Text="{Binding Name}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
 
         </Grid>
     </DockPanel>
