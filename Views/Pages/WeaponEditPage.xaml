@@ -10,6 +10,11 @@
       d:DesignWidth="400"
       x:Name="_this">
 
+
+    <Page.Resources>
+        <local:IndexConverter x:Key="IndexConv"/>
+    </Page.Resources>
+
     <DockPanel LastChildFill="True">
         <Grid>
             <Grid.RowDefinitions>
@@ -26,7 +31,8 @@
             <ListBox Name="WeaponListBox" DockPanel.Dock="Left" Width="100" Grid.Row="1" SelectionChanged="WeaponListBox_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
                      PreviewMouseLeftButtonDown="WeaponListBox_PreviewMouseLeftButtonDown"
                      Drop="WeaponListBox_Drop" 
-                     AllowDrop="True">
+                     AllowDrop="True"
+                     AlternationCount="999">
                 <ListBox.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Cut" Click="CtxMenu_Cut_Clicked" />
@@ -51,14 +57,28 @@
                         <MenuItem Header="Move down" Click="CtxMenu_MoveDown_Clicked"/>
                     </ContextMenu>
                 </ListBox.ContextMenu>
-                <ListBox.ItemTemplate>
+                <!--<ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="0,2">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="{Binding Name}"/>
+                            --><!--<TextBlock Text="{Binding Name}"/>--><!--
+                            <Label Content = "{Binding RelativeSource={RelativeSource WeaponListBox}, Path=WeaponListBox.(ItemsControl.AlternationIndex)}" />
                         </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>-->
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+
+                        <TextBlock >
+                            <Run Text="{Binding RelativeSource={RelativeSource FindAncestor, 
+    AncestorType={x:Type ListBoxItem}}, Mode=OneWay, 
+    Converter={StaticResource IndexConv}}"  />
+                             <Run Text=" " /> <!-- space -->
+                             <Run Text="{Binding Name}" />
+
+                        </TextBlock>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

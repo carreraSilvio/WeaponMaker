@@ -117,6 +117,7 @@
     <Compile Include="Commands\SaveProjectCommand.cs" />
     <Compile Include="Commands\ShutdownCommand.cs" />
     <Compile Include="Commands\NewProjectCommand.cs" />
+    <Compile Include="Source\IndexConverter.cs" />
     <Compile Include="Source\Models\Preferences.cs" />
     <Compile Include="Source\Models\WeaponType.cs" />
     <Compile Include="Source\Services\Command.cs" />
