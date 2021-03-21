@@ -9,7 +9,9 @@
       d:DesignHeight="250" 
       d:DesignWidth="400"
       x:Name="_this">
-
+    <Page.Resources>
+        <local:IndexConverter x:Key="IndexConv"/>
+    </Page.Resources>
     <DockPanel LastChildFill="True">
         <Grid>
             <Grid.RowDefinitions>
@@ -23,7 +25,13 @@
             VerticalAlignment="Top"
             Grid.Row="0"/>
 
-            <ListBox Name="WeaponTypeListBox" DockPanel.Dock="Left" Width="100" Grid.Row="1" SelectionChanged="WeaponListBox_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
+            <ListBox Name="WeaponTypeListBox" 
+                     DockPanel.Dock="Left" 
+                     Width="140"  
+                     Grid.Row="1" 
+                     SelectionChanged="WeaponListBox_SelectionChanged" 
+                     ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                     ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
                      AllowDrop="True">
                 <ListBox.ContextMenu>
                     <ContextMenu>
@@ -51,18 +59,25 @@
                 </ListBox.ContextMenu>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="0,2">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="{Binding Name}"/>
-                        </Grid>
+                        <TextBlock >
+                            <Run Text="{Binding RelativeSource={RelativeSource FindAncestor, 
+    AncestorType={x:Type ListBoxItem}}, Mode=OneWay, 
+    Converter={StaticResource IndexConv}}"  />
+                             <Run Text="" /> <!-- space -->
+                             <Run Text="{Binding Name}" />
+                        </TextBlock>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
             <Grid Grid.Row="2">
-                <Button Name="AddWeaponBtn"  Margin="0,0,50,0" Content="+" Click="AddButton_Clicked"/>
-                <Button Name="RemoveWeaponBtn" Margin="50,0,0,0" Content="-" Click="RemoveButton_Clicked"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Name="AddWeaponBtn" Grid.Column="0"  Content="+" Click="AddButton_Clicked"/>
+                    <Button Name="RemoveWeaponBtn" Grid.Column="1" Content="-" Click="RemoveButton_Clicked"/>
+                </Grid>
             </Grid>
         </Grid>
         <Grid Margin="5,0">

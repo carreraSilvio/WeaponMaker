@@ -18,7 +18,7 @@ namespace WeaponMaker
             }
         }
 
-        private  string _id;
+        private string _id;
         public string Id
         {
             get
@@ -30,6 +30,9 @@ namespace WeaponMaker
                 _id = value;
             }
         }
+
+        [NonSerialized]
+        private static readonly string[] IGNORED_COPY_PROPERTIES = new string[] {nameof(Id) };
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
@@ -45,14 +48,9 @@ namespace WeaponMaker
             _id = Guid.NewGuid().ToString().Substring(0, 8);
         }
 
-        public void Copy(WeaponType otherWeapon)
+        public void Copy(WeaponType otherWeapon) 
         {
-            PropertyInfo[] properties = typeof(Weapon).GetProperties();
-            foreach (PropertyInfo property in properties)
-            {
-                if (property.Name.Equals(nameof(Id))) continue;
-                property.SetValue(this, property.GetValue(otherWeapon));
-            }
+            Copier.CopyProperties<WeaponType>(this, otherWeapon, IGNORED_COPY_PROPERTIES);
         }
 
         public void Clear()

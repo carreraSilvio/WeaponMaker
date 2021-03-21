@@ -52,7 +52,22 @@ namespace WeaponMaker
             //Happens when you remove an item
             if (e.AddedItems.Count == 0)
             {
-                _session.CurrentWeaponTypeIndex = _session.CurrentWeaponTypeIndex == 0 ? _session.CurrentWeaponTypeIndex + 1 : _session.CurrentWeaponIndex - 1;
+                if(_session.Project.WeaponTypes.Count == 1)
+                {
+                    _session.CurrentWeaponTypeIndex = 0;
+                }
+                else
+                {
+                    if (_session.CurrentWeaponTypeIndex == 0)
+                    {
+                        _session.CurrentWeaponTypeIndex += 1;
+                    }
+                    else
+                    {
+                        _session.CurrentWeaponTypeIndex -= 1;
+                    }
+                }
+                
             }
             else
             {
@@ -141,10 +156,10 @@ namespace WeaponMaker
         private void CtxMenu_Duplicate_Clicked(object sender, RoutedEventArgs e)
         {
             var targetIndex = _session.CurrentWeaponTypeIndex;
-            var copiedWeaponType = new WeaponType();
-            copiedWeaponType.Copy(_session.CurrentWeaponType);
+            var duplicatedWeaponType = new WeaponType();
+            duplicatedWeaponType.Copy(_session.CurrentWeaponType);
 
-            _session.Project.WeaponTypes.Insert(targetIndex, copiedWeaponType);
+            _session.Project.WeaponTypes.Insert(targetIndex, duplicatedWeaponType);
             UpdateRemoveButtons();
         }
 

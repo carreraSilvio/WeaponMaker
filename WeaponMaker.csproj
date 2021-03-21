@@ -123,6 +123,8 @@
     <Compile Include="Source\Services\Command.cs" />
     <Compile Include="Source\Services\CommandService.cs" />
     <Compile Include="Source\Services\PreferencesService.cs" />
+    <Compile Include="Source\Utils\ClipboardUtils.cs" />
+    <Compile Include="Source\Utils\Copier.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
