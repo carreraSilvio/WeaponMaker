@@ -195,56 +195,7 @@ namespace WeaponMaker
         }
         #endregion
 
-        #region Drag-And-Drop
-
-
-        private void WeaponListBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-        }
-
-        void WeaponListBox_Drop(object sender, DragEventArgs e)
-        {
-
-
-            //ListBox parent = (ListBox)sender;
-            //Weapon data = (Weapon)e.Data.GetData(typeof(Weapon));
-            //var tst = parent.DataContext as Weapon;
-            //_session.Project.Weapons.Remove(data);
-            //_session.Project.Weapons.Add(data);
-            //_session.CurrentWeaponIndex = _session.Project.Weapons.IndexOf(data);
-
-            //var parent = (ListBox)sender;
-            //var droppedData = (Weapon)e.Data.GetData(typeof(Weapon));
-
-            //int removedIdx = WeaponListBox.Items.IndexOf(droppedData);
-            //int targetIdx = WeaponListBox.Items.IndexOf(WeaponListBox.SelectedItem);
-
-            //var droppedData = e.Data.GetData(typeof(Weapon)) as Weapon;
-            //var target = ((ListBoxItem)(sender)).DataContext as Weapon;
-
-            //int removedIdx = WeaponListBox.Items.IndexOf(droppedData);
-            //int targetIdx = WeaponListBox.Items.IndexOf(target);
-
-            //if (removedIdx < targetIdx)
-            //{
-            //    _session.Project.Weapons.Insert(targetIdx + 1, droppedData);
-            //    _session.Project.Weapons.RemoveAt(removedIdx);
-            //}
-            //else
-            //{
-            //    int remIdx = removedIdx + 1;
-            //    if (_session.Project.Weapons.Count + 1 > remIdx)
-            //    {
-            //        _session.Project.Weapons.Insert(targetIdx, droppedData);
-            //        _session.Project.Weapons.RemoveAt(remIdx);
-            //    }
-            //}
-            //WeaponListBox.SelectedItem = droppedData;
-        }
-
-        #endregion
-
-
+      
         private void WeaponTypesComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count != 0)

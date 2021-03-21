@@ -28,10 +28,13 @@
             VerticalAlignment="Top"
             Grid.Row="0"/>
 
-            <ListBox Name="WeaponListBox" DockPanel.Dock="Left" Width="100" Grid.Row="1" SelectionChanged="WeaponListBox_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
-                     PreviewMouseLeftButtonDown="WeaponListBox_PreviewMouseLeftButtonDown"
-                     Drop="WeaponListBox_Drop" 
-                     AllowDrop="True"
+            <ListBox Name="WeaponListBox" 
+                     DockPanel.Dock="Left" 
+                     Grid.Row="1" 
+                     Width="140" 
+                     SelectionChanged="WeaponListBox_SelectionChanged" 
+                     ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                     ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
                      AlternationCount="999">
                 <ListBox.ContextMenu>
                     <ContextMenu>
@@ -43,7 +46,7 @@
                             Name="CtxMenu_Paste" 
                             IsEnabled="{Binding FallbackValue=false}"  
                         />
-                        
+
                         <Separator/>
                         <MenuItem Header="Duplicate" Click="CtxMenu_Duplicate_Clicked"/>
                         <MenuItem 
@@ -52,39 +55,32 @@
                             Name="CtxMenu_Delete" 
                             />
                         <Separator/>
-                        
+
                         <MenuItem Header="Move up" Click="CtxMenu_MoveUp_Clicked"/>
                         <MenuItem Header="Move down" Click="CtxMenu_MoveDown_Clicked"/>
                     </ContextMenu>
                 </ListBox.ContextMenu>
-                <!--<ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Margin="0,2">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            --><!--<TextBlock Text="{Binding Name}"/>--><!--
-                            <Label Content = "{Binding RelativeSource={RelativeSource WeaponListBox}, Path=WeaponListBox.(ItemsControl.AlternationIndex)}" />
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>-->
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-
                         <TextBlock >
                             <Run Text="{Binding RelativeSource={RelativeSource FindAncestor, 
     AncestorType={x:Type ListBoxItem}}, Mode=OneWay, 
     Converter={StaticResource IndexConv}}"  />
-                             <Run Text=" " /> <!-- space -->
+                             <Run Text="" /> <!-- space -->
                              <Run Text="{Binding Name}" />
-
                         </TextBlock>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
             <Grid Grid.Row="2">
-                <Button Name="AddWeaponBtn"  Margin="0,0,50,0" Content="+" Click="AddButton_Clicked"/>
-                <Button Name="RemoveWeaponBtn" Margin="50,0,0,0" Content="-" Click="RemoveButton_Clicked"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Name="AddWeaponBtn" Grid.Column="0"  Content="+" Click="AddButton_Clicked"/>
+                    <Button Name="RemoveWeaponBtn" Grid.Column="1" Content="-" Click="RemoveButton_Clicked"/>
+                </Grid>
             </Grid>
         </Grid>
         <Grid Margin="5,0">
