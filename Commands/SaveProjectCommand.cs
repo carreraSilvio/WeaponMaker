@@ -19,7 +19,7 @@ namespace WeaponMaker
             var sessionService = ServiceLocator.Fetch<SessionService>();
             var project = sessionService.Project;
             sessionService.IsProjectModified = false;
-            project.LastTimeSaved = DateTime.UtcNow.ToString("yy-MM-dd_hh:mm:ss");
+            project.LastTimeSaved = DateTime.UtcNow.ToString("yyyy-MM-dd_hh:mm:ss");
             return FileSystemService.SaveProject(project);
         }
     }
