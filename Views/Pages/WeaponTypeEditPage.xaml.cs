@@ -52,7 +52,7 @@ namespace WeaponMaker
             //Happens when you remove an item
             if (e.AddedItems.Count == 0)
             {
-                _session.CurrentWeaponTypeIndex -= 1;
+                _session.CurrentWeaponTypeIndex = _session.CurrentWeaponTypeIndex == 0 ? _session.CurrentWeaponTypeIndex + 1 : _session.CurrentWeaponIndex - 1;
             }
             else
             {

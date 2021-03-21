@@ -42,7 +42,7 @@ namespace WeaponMaker
 
         public WeaponType()
         {
-            _id = Guid.NewGuid().ToString();
+            _id = Guid.NewGuid().ToString().Substring(0, 8);
         }
 
         public void Copy(WeaponType otherWeapon)

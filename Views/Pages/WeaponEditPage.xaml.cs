@@ -57,19 +57,17 @@ namespace WeaponMaker
         private void WeaponListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //Happens when you remove an item
-            if (e.AddedItems.Count == 0)
+            if(e.AddedItems.Count == 0)
             {
-                _session.CurrentWeaponIndex -= 1;
-            }
-            else
-            {
+                _session.CurrentWeaponIndex = _session.CurrentWeaponIndex == 0 ? _session.CurrentWeaponIndex + 1 : _session.CurrentWeaponIndex - 1;
+            }    
+            else 
+            { 
                 _session.CurrentWeaponIndex = WeaponListBox.Items.IndexOf(e.AddedItems[0]);
 
                 UpdateWeaponTypeComboBoxSelection();
             }
             RaisePropertyChanged(nameof(CurrentWeapon));
-
-
         }
 
         #region Bottom Buttons Handlers
@@ -185,6 +183,8 @@ namespace WeaponMaker
         private void CtxMenu_MoveDown_Clicked(object sender, RoutedEventArgs e)
         {
             if (WeaponListBox.SelectedIndex >= WeaponListBox.Items.Count - 1) return;
+
+
 
             var selectedIndex = WeaponListBox.SelectedIndex;
 
