@@ -107,6 +107,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\CheckChangesCommand.cs" />
     <Compile Include="Commands\ExportProjectCommand.cs" />
     <Compile Include="Commands\ExportWeaponCommand.cs" />
     <Compile Include="Commands\ImportWeaponCommand.cs" />

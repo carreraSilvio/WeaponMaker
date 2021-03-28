@@ -11,34 +11,14 @@ namespace WeaponMaker
 {
     public sealed class ShutdownCommand : Command
     {
-        private readonly SessionService _sessionService;
-        private readonly SaveProjectCommand _saveProjectCommand;
-
-        public ShutdownCommand(SessionService sessionService)
+        public ShutdownCommand()
         {
-            _sessionService = sessionService;
-            _saveProjectCommand = new SaveProjectCommand();
         }
 
         public override bool Execute(object parameter = null)
         {
-            if (_sessionService.IsProjectModified)
-            {
-                var messageBoxResult = MessageBox.Show(
-                    "Do you want to save the changes you made?",
-                    "Project has been modified", 
-                    System.Windows.MessageBoxButton.YesNoCancel);
-                if (messageBoxResult == MessageBoxResult.Yes)
-                {
-                    _saveProjectCommand.Execute();
-                }
-                else if (messageBoxResult == MessageBoxResult.Cancel)
-                {
-                    return false;
-                }
-            }
             Application.Current.Shutdown();
-            
+
             return true;
         }
     }

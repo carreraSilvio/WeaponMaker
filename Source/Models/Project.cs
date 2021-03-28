@@ -44,10 +44,14 @@ namespace WeaponMaker
             }
         }
 
-        public ObservableCollection<Weapon> Weapons 
-        { 
-            get => _weapons; 
-            set => _weapons = value; 
+        public ObservableCollection<Weapon> Weapons
+        {
+            get => _weapons;
+            set
+            {
+                _weapons = value;
+                RaisePropertyChanged(nameof(Weapons));
+            }
         }
         private ObservableCollection<Weapon> _weapons = new ObservableCollection<Weapon>();
 
@@ -56,7 +60,7 @@ namespace WeaponMaker
             get => _weaponTypes;
             set => _weaponTypes = value;
         }
-        private ObservableCollection<WeaponType> _weaponTypes;
+        private ObservableCollection<WeaponType> _weaponTypes = new ObservableCollection<WeaponType>();
 
 
         public event PropertyChangedEventHandler PropertyChanged;

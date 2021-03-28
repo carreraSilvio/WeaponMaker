@@ -19,9 +19,11 @@ namespace WeaponMaker
             var result = FileSystemService.OpenProject();
             if (result.success)
             {
+                //TODO: Reuse LoadProjectCommand inside this here
                 var session = ServiceLocator.Fetch<SessionService>();
                 session.Clear();
                 session.Project = result.project;
+                session.WireEventHandlers();
 
                 var prefService = ServiceLocator.Fetch<PreferencesService>();
                 prefService.Preferences.LastProjectName = session.Project.Name;

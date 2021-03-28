@@ -24,7 +24,6 @@ namespace WeaponMaker
                 session.Clear();
                 session.Project = result.project;
                 session.WireEventHandlers();
-                
 
                 return true;
             }

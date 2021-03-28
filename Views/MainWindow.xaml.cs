@@ -132,8 +132,10 @@ namespace WeaponMaker
         #region Exit
         private void Exit_Clicked(object sender, RoutedEventArgs e)
         {
-            var commandService = ServiceLocator.Fetch<CommandService>();
-            commandService.Get<ShutdownCommand>().Execute();
+            if(_commandService.Get<CheckChangesCommand>().Execute())
+            {
+                _commandService.Get<ShutdownCommand>().Execute();
+            }
         } 
         #endregion
 
@@ -168,8 +170,9 @@ namespace WeaponMaker
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            _commandService.Get<ShutdownCommand>().Execute();
+            _commandService.Get<CheckChangesCommand>().Execute();
         }
+
 
         private void ExecuteSaveProject()
         {

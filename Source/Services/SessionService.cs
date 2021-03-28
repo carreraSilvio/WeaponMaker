@@ -51,6 +51,9 @@ namespace WeaponMaker
 
             Project.Weapons.CollectionChanged -= Weapons_CollectionChanged;
             Project.Weapons.CollectionChanged += Weapons_CollectionChanged;
+
+            Project.WeaponTypes.CollectionChanged -= WeaponTypes_CollectionChanged;
+            Project.WeaponTypes.CollectionChanged += WeaponTypes_CollectionChanged;
         }
 
         private void Project_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -61,6 +64,11 @@ namespace WeaponMaker
         }
 
         private void Weapons_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            IsProjectModified = true;
+        }
+
+        private void WeaponTypes_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             IsProjectModified = true;
         }
