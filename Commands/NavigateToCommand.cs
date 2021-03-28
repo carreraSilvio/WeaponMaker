@@ -12,16 +12,16 @@ namespace WeaponMaker
     {
         public class Args
         {
-            public Window caller;
+            public Window currentWindow;
             public Type target;
         }
 
         public override bool Execute(object parameter)
         {
             var args = parameter as Args;
-            var window = args.caller;
-            var editWindow = new MainWindow();
-            editWindow.Show();
+            var window = args.currentWindow;
+            var nextWindow = new MainWindow();
+            nextWindow.Show();
             window.Close();
 
             return true;

@@ -30,7 +30,7 @@ namespace WeaponMaker
             {
                 var args = new NavigateToCommand.Args()
                 {
-                    caller = this,
+                    currentWindow = this,
                     target = typeof(MainWindow)
                 };
                 _commandService.Get<NavigateToCommand>().Execute(args);
@@ -43,7 +43,7 @@ namespace WeaponMaker
             {
                 var args = new NavigateToCommand.Args()
                 {
-                    caller = this,
+                    currentWindow = this,
                     target = typeof(MainWindow)
                 };
                 _commandService.Get<NavigateToCommand>().Execute(args);
@@ -56,7 +56,7 @@ namespace WeaponMaker
             {
                 var args = new NavigateToCommand.Args()
                 {
-                    caller = this,
+                    currentWindow = this,
                     target = typeof(MainWindow)
                 };
                 _commandService.Get<NavigateToCommand>().Execute(args);

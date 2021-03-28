@@ -30,7 +30,7 @@ namespace WeaponMaker
                     System.Windows.MessageBoxButton.YesNoCancel);
                 if (messageBoxResult == MessageBoxResult.Yes)
                 {
-                    _saveProjectCommand.Execute();
+                    return true;
                 }
                 else if (messageBoxResult == MessageBoxResult.Cancel)
                 {
@@ -38,7 +38,7 @@ namespace WeaponMaker
                 }
             }
 
-            return true;
+            return false;
         }
     }
 }

@@ -67,20 +67,27 @@ namespace WeaponMaker
             {
                 var args = new NavigateToCommand.Args()
                 {
-                    caller = this,
+                    currentWindow = this,
                     target = typeof(MainWindow)
                 };
                 _commandService.Get<NavigateToCommand>().Execute(args);
             }
         }
 
+        private bool _exitingPostOpenProjectCommand;
         private void HandleOpenProjectClicked(object sender, RoutedEventArgs e)
         {
+            if (_commandService.Get<CheckChangesCommand>().Execute())
+            {
+                _commandService.Get<SaveProjectCommand>().Execute();
+            }
+
+            _exitingPostOpenProjectCommand = true;
             if (_commandService.Get<OpenProjectCommand>().Execute())
             {
                 var args = new NavigateToCommand.Args()
                 {
-                    caller = this,
+                    currentWindow = this,
                     target = typeof(MainWindow)
                 };
                 _commandService.Get<NavigateToCommand>().Execute(args);
@@ -134,6 +141,7 @@ namespace WeaponMaker
         {
             if(_commandService.Get<CheckChangesCommand>().Execute())
             {
+                _commandService.Get<SaveProjectCommand>().Execute();
                 _commandService.Get<ShutdownCommand>().Execute();
             }
         } 
@@ -168,9 +176,22 @@ namespace WeaponMaker
             ExecuteSaveProject();
         }
 
+        /// <summary>
+        /// Callback for when you click the (x) and also when you call Close on this Window.
+        /// </summary>
         protected override void OnClosing(CancelEventArgs e)
         {
-            _commandService.Get<CheckChangesCommand>().Execute();
+            if (_exitingPostOpenProjectCommand)
+            {
+                _exitingPostOpenProjectCommand = false;
+                return;
+            }
+
+            if (_commandService.Get<CheckChangesCommand>().Execute())
+            {
+                _commandService.Get<SaveProjectCommand>().Execute();
+                _commandService.Get<ShutdownCommand>().Execute();
+            }
         }
 
 
