@@ -30,7 +30,8 @@ namespace WeaponMaker
                     new ExportProjectCommand(),
                     new ExportWeaponCommand(),
                     new LoadProjectCommand(),
-                    new ShutdownCommand(session)
+                    new ShutdownCommand(),
+                    new CheckChangesCommand(session)
                 });
             ServiceLocator.Add(commander);
 
