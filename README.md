@@ -1,8 +1,8 @@
 # Weapon Maker
 A tool to create and manage the weapons for your game.
 
-![img](https://i.imgur.com/tSQXTtE.gif)
-![img](hhttps://i.imgur.com/ajVmKCR.gif)
+![img](https://i.imgur.com/TCLKVcb.gif)
+![img](https://i.imgur.com/ajVmKCR.gif)
 
 # Features
 
