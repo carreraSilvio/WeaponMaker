@@ -8,3 +8,4 @@ A tool to create and manage the weapons for your game.
 
 * Create weapons and define their parameters
 * Create weapon type to associate to your weapons 
+* Export as JSON to intergrate into your engine of choice
